@@ -107,10 +107,14 @@
 <meta property="og:site_name" content="StrayInCosmos">
 <meta property="og:description" content="博客搭建前前后后遇到了不少问题，挺花时间的。现在做个总结和记录，或许也能帮到后来的人。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-19T14:49:19.599Z">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/conblog1.jpg">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/conblog2.jpg">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/conblog3.jpg">
+<meta property="og:updated_time" content="2018-07-19T07:20:10.648Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在用hexo和github搭建个人博客中遇到的问题及解决办法">
 <meta name="twitter:description" content="博客搭建前前后后遇到了不少问题，挺花时间的。现在做个总结和记录，或许也能帮到后来的人。">
+<meta name="twitter:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/conblog1.jpg">
 
 
 
@@ -390,22 +394,24 @@
       
 
       
-        <blockquote>
-<p>博客搭建前前后后遇到了不少问题，挺花时间的。现在做个总结和记录，或许也能帮到后来的人。<br><a id="more"></a></p>
-</blockquote>
+        <p>博客搭建前前后后遇到了不少问题，挺花时间的。现在做个总结和记录，或许也能帮到后来的人。<br><a id="more"></a></p>
 <h2 id="博客部署问题"><a href="#博客部署问题" class="headerlink" title="博客部署问题"></a><strong>博客部署问题</strong></h2><blockquote>
 <p><strong>部署莫名失败</strong></p>
 </blockquote>
-<p>当时Git的local无法使用，错误大致显示为这样：</p>
+<p><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/conblog1.jpg" alt="deploy"><br>当时Git的local无法使用，错误大致显示为这样：</p>
 <p>最后发现是因为我换了一个管理员登录，无法部署。再换回来就好啦。</p>
 <h2 id="博客评论功能"><a href="#博客评论功能" class="headerlink" title="博客评论功能"></a><strong>博客评论功能</strong></h2><blockquote>
 <p><strong>友言评论无法显示</strong></p>
 </blockquote>
 <p>之前试过<strong>友言</strong>，在手机端以及本地博客都能正常显示，可是<strong>在PC端远程网站上无法显示</strong>。最后发现可能是因为友言<strong>不支持https</strong>，只能作罢。另外，据说畅言也不支持https。<br>解决办法是<strong>换一个</strong>！目前使用的是来必力，但是加载比较慢，其他都好。<br>之后或许能尝试一下自己搭建一个评论功能。</p>
+<h2 id="安全证书失效"><a href="#安全证书失效" class="headerlink" title="安全证书失效"></a><strong>安全证书失效</strong></h2><blockquote>
+<p><strong>无法进入自己的博客，Chrome显示“您的连接不是私密连接”</strong></p>
+</blockquote>
+<p>本来还以为自己的网站被黑了呢之类的，后来知道了像我这样的静态网页是不存在这种问题的，不太需要考虑安全问题。最后发现是github颁发给我的证书过期了。<br>去网上搜索了一下，说通常过两天就自动更新了（我过期五天了）；有说直接找github客服解决，几小时就好；有说是http和https的问题<br>解决办法是更新域名解析。方法跟当初绑定域名的一样。ping一下自己的blog，返回的一个IP值，就是github主机的IP值<br><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/conblog2.jpg" alt="ping"><br>然后去域名解析的地方设置一下这个IP：<br><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/conblog3.jpg" alt="resolve"><br>关于这些记录类型和主机记录的含义，参见阿里云的<a href="https://help.aliyun.com/document_detail/29716.html" target="_blank" rel="noopener">帮助文档</a></p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><blockquote>
 <p>遇到问题的时候，不能放过任何一个可能的错误并且找到对应解决方法。</p>
 </blockquote>
-<p>PS:拖延如我，在时隔两个月之后找到了当初写的这篇草稿…已经忘了不少了，不够全面，先挖个坑等我记起来来填！（不会了…</p>
+<p>PS0:拖延如我，在时隔两个月之后找到了当初写的这篇草稿…已经忘了不少了，不够全面，先挖个坑等我记起来来填！（不会了…<br>PS1:更于0719，添加了安全证书的问题</p>
 
       
     </div>
@@ -602,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#博客部署问题"><span class="nav-number">1.</span> <span class="nav-text">博客部署问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客评论功能"><span class="nav-number">2.</span> <span class="nav-text">博客评论功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#博客部署问题"><span class="nav-number">1.</span> <span class="nav-text">博客部署问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客评论功能"><span class="nav-number">2.</span> <span class="nav-text">博客评论功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全证书失效"><span class="nav-number">3.</span> <span class="nav-text">安全证书失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
             
 
           </div>
