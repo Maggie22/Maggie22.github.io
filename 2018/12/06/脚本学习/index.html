@@ -108,7 +108,7 @@
 <meta property="og:description" content="脚本真的太方便了！！！">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://forlwq.oss-cn-hangzhou.aliyuncs.com/script-1.png">
-<meta property="og:updated_time" content="2018-12-06T10:29:40.965Z">
+<meta property="og:updated_time" content="2018-12-06T12:45:10.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="脚本学习">
 <meta name="twitter:description" content="脚本真的太方便了！！！">
@@ -396,7 +396,8 @@
 <h2 id="批处理给文件命名。"><a href="#批处理给文件命名。" class="headerlink" title="批处理给文件命名。"></a>批处理给文件命名。</h2><blockquote>
 <p>1.jpg 2.jpg 3.jpg…</p>
 </blockquote>
-<p>首先要解决如何一行输出一个文件名，试了好多都不行，dir/w 只能一行输出三个。最后阴差阳错在PowerShell成功了。<br>用这个语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd /r dir/b</span><br></pre></td></tr></table></figure></p>
+<p>首先要解决如何一行输出一个文件名，dir/w 只能一行输出三个，dir/b可以。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir/b</span><br></pre></td></tr></table></figure></p>
+<p>用PowerShell中要在前面加cmd /r<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd /r dir/b</span><br></pre></td></tr></table></figure></p>
 <p>使用效果如图：<br><img src="http://forlwq.oss-cn-hangzhou.aliyuncs.com/script-1.png" alt="此处输入图片的描述"><br>具体步骤如下：<br>1.输入所有文件名到excel文件中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd /r dir/b &gt;rename.xls</span><br></pre></td></tr></table></figure></p>
 <p>2.A列单元格中按序存放所有文件名，在B列单元格中输入对应的要转成的文件名，如1.jpg…（用填充）<br>3.在C列单元格中输入公式（再用填充）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=&quot;ren &quot;&amp;A1&amp;&quot; &quot;&amp;B1</span><br></pre></td></tr></table></figure></p>
 <p>4.复制C列到.txt文件中，再将txt后缀名改成bat<br>5.记得把bat文件放到那个目录下，运行bat文件就行了~</p>
