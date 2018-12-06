@@ -395,19 +395,14 @@
 
       
         
-          
-            <h2 id="批处理给文件命名。"><a href="#批处理给文件命名。" class="headerlink" title="批处理给文件命名。"></a>批处理给文件命名。</h2><blockquote>
-<p>1.jpg 2.jpg 3.jpg…</p>
-</blockquote>
-<p>首先要解决如何一行输出一个文件名，试了好多都不行，dir/w 只能一行输出三个。最后阴差阳错在PowerShell成功了。<br>用这个语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd /r dir/b</span><br></pre></td></tr></table></figure></p>
-<p>使用效果如图：<br><img src="http://forlwq.oss-cn-hangzhou.aliyuncs.com/script-1.png" alt="此处输入图片的描述"><br>具体步骤如下：<br>1.输入所有文件名到excel文件中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd /r dir/b &gt;rename.xls</span><br></pre></td></tr></table></figure></p>
-<p>2.A列单元格中按序存放所有文件名，在B列单元格中输入对应的要转成的文件名，如1.jpg…（用填充）<br>3.在C列单元格中输入公式（再用填充）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">=&quot;ren &quot;&amp;A1&amp;&quot; &quot;&amp;B1</span><br></pre></td></tr></table></figure></p>
-<p>4.复制C列到.txt文件中，再将txt后缀名改成bat<br>5.记得把bat文件放到那个目录下，运行bat文件就行了~</p>
-<blockquote>
-<p>PS1：PowerShell不能直接使用dir/w，会显示找不到方法的错误。在Stack Overflow上找到了解决办法（<a href="https://stackoverflow.com/questions/1479663/how-do-i-do-dir-s-b-in-powershell/39459273" target="_blank" rel="noopener">ClickHere</a><br>PS2：Stack Overflow上说用ls命令可以（<a href="https://stackoverflow.com/questions/42224181/exact-bash-equivalent-for-cmd-dir-b" target="_blank" rel="noopener">ClickHere</a>）。这是Linux下的方法。（两个区别在于Windows下的dir命令是批处理方法，Linux下的ls命令不是<br>PS3：Stack Overflow大法好！</p>
-</blockquote>
-
-          
+          <p>脚本真的太方便了！！！<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/06/脚本学习/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1022,7 +1017,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://forlwq.oss-cn-hangzhou.aliyuncs.com/13.png" rel="gallery_cjpcgfamo000bxo7q182ntwgw"
+                 href="https://forlwq.oss-cn-hangzhou.aliyuncs.com/13.png" rel="gallery_cjpcgmnxf00018o7qemo23mom"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/13.png" itemprop="contentUrl"/>
               </a>
