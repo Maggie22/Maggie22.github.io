@@ -108,7 +108,7 @@
 <meta property="og:description" content="CodeWars第二天">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/DailyCode/2.jpg">
-<meta property="og:updated_time" content="2019-06-20T08:21:07.035Z">
+<meta property="og:updated_time" content="2019-06-21T11:50:14.003Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coding0620">
 <meta name="twitter:description" content="CodeWars第二天">
@@ -431,9 +431,25 @@
 <a id="more"></a>
 <hr>
 <h2 id="第一题-Decode-the-Morse-code-1"><a href="#第一题-Decode-the-Morse-code-1" class="headerlink" title="第一题 Decode the Morse code/1"></a>第一题 Decode the Morse code/1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># My Solution</span><br><span class="line">def decodeMorse(morse_code):</span><br><span class="line">    # ToDo: Accept dots, dashes and spaces, return human-readable message</span><br><span class="line">    str = &apos;&apos;</span><br><span class="line">    words = morse_code.strip().split(&apos;   &apos;)</span><br><span class="line">    for word in words:</span><br><span class="line">        w = [w.replace(w, MORSE_CODE[w]) for w in word.split(&apos; &apos;)]</span><br><span class="line">        str = str + &apos;&apos;.join(w)+&apos; &apos;</span><br><span class="line">    return str.strip()</span><br></pre></td></tr></table></figure>
-<p>(其实我觉得比起第一天的好多了。用到了第一天学到的join和列表构建)<br>这个解法不错，算得上有丶clever~~<br>rank one的解法依然只用了一行，一行代码两个join<br>有个改进的地方。<br>单词可以放在一个list里，然后再return’ ‘.join(list)就好了。</p>
+<p>(其实我觉得比起第一天的好多了。用到了第一天学到的join和列表构建)<br>这个解法不错，算得上有点clever~~<br>rank one的解法依然只用了一行，一行代码两个join<br>有个改进的地方。<br>单词可以放在一个list里，然后再return’ ‘.join(list)就好了。</p>
 <h2 id="第二题-Find-the-missing-letter"><a href="#第二题-Find-the-missing-letter" class="headerlink" title="第二题 Find the missing letter"></a>第二题 Find the missing letter</h2><p>给一个字符列表，找出按顺序确少的字母。<br>如[‘a’,’b’,’c’,’e’]，返回’d’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># My Solution</span><br><span class="line">def find_missing_letter(chars):</span><br><span class="line">    for i in range(1, len(chars)):</span><br><span class="line">        if ord(chars[i]) - ord(chars[i-1]) &gt; 1:</span><br><span class="line">            break</span><br><span class="line">    return chr(ord(chars[i])-1)</span><br></pre></td></tr></table></figure></p>
 <p>另一个解法是匹配字符串。然后一个一个匹配。第一个没匹配上的就是错的。</p>
+<h2 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h2><p>将字符串中的字母代替为其在字母表中对应的位置（数字）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># My Solution</span><br><span class="line">def alphabet_position(text):</span><br><span class="line">    alphabet = &#123;&#125;</span><br><span class="line">    result = []</span><br><span class="line">    for i in range(26):</span><br><span class="line">        alphabet[chr(i+97)] = str(i+1)</span><br><span class="line">    text = list(text.replace(&apos; &apos;,&apos;&apos;).lower())</span><br><span class="line">    for i in range(len(text)):</span><br><span class="line">        if text[i] in alphabet.keys():</span><br><span class="line">            result.append(alphabet[text[i]])</span><br><span class="line">    return &apos; &apos;.join(result)</span><br></pre></td></tr></table></figure></p>
+<p><strong>Points：</strong></p>
+<ol>
+<li>lower() ：将字符串中的所有字母转为小写字母</li>
+<li>str(): 如果被定义了的话，这个函数就用不了了</li>
+<li>把string转为list：用list()</li>
+</ol>
+<p><strong>他山之石：</strong></p>
+<ol>
+<li>字母表中的位置其实就是这个字母的ASCII码 - a的ASCII码（97） + 1（即直接减96）</li>
+<li>可以不构建字典，直接用”abcdefg…”的字符串，再用index函数就可以找到位置了</li>
+<li>判断字符是否是字母，有函数:isalpha()</li>
+<li>之前讲到的list构造中，还可以加上条件判断</li>
+<li>要遍历字符串中的每一个字符，直接for c in str即可，不用转为列表再操作~<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 一行代码的解法</span><br><span class="line">def alphabet_position(text):</span><br><span class="line">    return &apos; &apos;.join(str(ord(x)-96) for x in text.lower() if x.isalpha())</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>有点进步（主要是会用了一些python函数）。题目本身也不难，主要要想到一个好的解法。希望来点难度更大的题啦~</p>
 
       
@@ -625,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一题-Decode-the-Morse-code-1"><span class="nav-number">1.</span> <span class="nav-text">第一题 Decode the Morse code/1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二题-Find-the-missing-letter"><span class="nav-number">2.</span> <span class="nav-text">第二题 Find the missing letter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">3.</span> <span class="nav-text">后记</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一题-Decode-the-Morse-code-1"><span class="nav-number">1.</span> <span class="nav-text">第一题 Decode the Morse code/1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二题-Find-the-missing-letter"><span class="nav-number">2.</span> <span class="nav-text">第二题 Find the missing letter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三题"><span class="nav-number">3.</span> <span class="nav-text">第三题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div>
             
 
           </div>
