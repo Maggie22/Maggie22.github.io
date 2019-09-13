@@ -108,7 +108,7 @@
 <meta property="og:description" content="CodeWars第二天">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/DailyCode/2.jpg">
-<meta property="og:updated_time" content="2019-06-21T11:50:14.003Z">
+<meta property="og:updated_time" content="2019-06-21T12:30:39.047Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Coding0620">
 <meta name="twitter:description" content="CodeWars第二天">
@@ -415,7 +415,7 @@
           
           
             <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox" href="https://forlwq.oss-cn-hangzhou.aliyuncs.com/DailyCode/2.jpg" rel="gallery_cjx4ecb2e0002pw7q2xh280yi" itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+              <a class="post-gallery-img fancybox" href="https://forlwq.oss-cn-hangzhou.aliyuncs.com/DailyCode/2.jpg" rel="gallery_ck0iayv2w0016087qvb3ftxyb" itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/DailyCode/2.jpg" itemprop="contentUrl">
               </a>
             
@@ -447,9 +447,10 @@
 <li>可以不构建字典，直接用”abcdefg…”的字符串，再用index函数就可以找到位置了</li>
 <li>判断字符是否是字母，有函数:isalpha()</li>
 <li>之前讲到的list构造中，还可以加上条件判断</li>
-<li>要遍历字符串中的每一个字符，直接for c in str即可，不用转为列表再操作~<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 一行代码的解法</span><br><span class="line">def alphabet_position(text):</span><br><span class="line">    return &apos; &apos;.join(str(ord(x)-96) for x in text.lower() if x.isalpha())</span><br></pre></td></tr></table></figure>
-</li>
+<li>要遍历字符串中的每一个字符，直接for c in str即可，不用转为列表再操作~<br>PS: 但是我去计算了一下时间（time.clock()），先转为list再操作，用时会短一些。当然，差的不是很多。</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># 验证运算时间</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">def alphabet_position_1(text):</span><br><span class="line">    return &apos; &apos;.join(str(ord(x)-96) for x in text.lower() if x.isalpha())</span><br><span class="line"></span><br><span class="line">def alphabet_position_2(text):</span><br><span class="line">    return &apos; &apos;.join(str(ord(x)-96) for x in list(text.lower()) if x.isalpha())</span><br><span class="line"></span><br><span class="line">s = &apos;iuyfsvbdutg iaef&apos;</span><br><span class="line">start = time.clock()</span><br><span class="line">alphabet_position_1(s)</span><br><span class="line">end = time.clock()</span><br><span class="line"></span><br><span class="line">print(&quot;运行时间：&quot;, str(end-start))</span><br><span class="line"></span><br><span class="line">start = time.clock()</span><br><span class="line">alphabet_position_2(s)</span><br><span class="line">end = time.clock()</span><br><span class="line">print(&quot;运行时间：&quot;, str(end-start))</span><br><span class="line">-----------------------------</span><br><span class="line">结果：</span><br><span class="line">运行时间： 5.759999999999099e-05</span><br><span class="line">运行时间： 4.394700000000251e-05</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 一行代码的解法</span><br><span class="line">def alphabet_position(text):</span><br><span class="line">    return &apos; &apos;.join(str(ord(x)-96) for x in text.lower() if x.isalpha())</span><br></pre></td></tr></table></figure>
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>有点进步（主要是会用了一些python函数）。题目本身也不难，主要要想到一个好的解法。希望来点难度更大的题啦~</p>
 
       
@@ -487,6 +488,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/13/《数学之美》读书笔记-1/" rel="prev" title="《数学之美》读书笔记-1">
+                《数学之美》读书笔记-1 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -563,7 +568,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -590,7 +595,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   
                 </div>
