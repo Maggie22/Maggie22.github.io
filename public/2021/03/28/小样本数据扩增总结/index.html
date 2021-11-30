@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/heart_bulb_stars_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/heart_bulb_stars_16x16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gLGfRPT9se9YzlHqvbbRntI9WnsvXNTS7qjR1TrmrGM">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="寒假的时候针对小样本扩增这一块内容收集了很多文献，也看了很多文献。第一次有点科研的感觉，在这里做个总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小样本数据扩增总结">
+<meta property="og:url" content="http://example.com/2021/03/28/%E5%B0%8F%E6%A0%B7%E6%9C%AC%E6%95%B0%E6%8D%AE%E6%89%A9%E5%A2%9E%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="StrayInCosmos">
+<meta property="og:description" content="寒假的时候针对小样本扩增这一块内容收集了很多文献，也看了很多文献。第一次有点科研的感觉，在这里做个总结。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/1.png">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323095705808.png">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323110113774.png">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323112338424.png">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323144845585.png">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323145600859.png">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323150601178.png">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323150827500.png">
+<meta property="article:published_time" content="2021-03-28T08:48:15.000Z">
+<meta property="article:modified_time" content="2021-04-01T03:41:53.692Z">
+<meta property="article:author" content="Maggie Lee">
+<meta property="article:tag" content="小样本">
+<meta property="article:tag" content="数据扩增">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/1.png">
+
+
+<link rel="canonical" href="http://example.com/2021/03/28/%E5%B0%8F%E6%A0%B7%E6%9C%AC%E6%95%B0%E6%8D%AE%E6%89%A9%E5%A2%9E%E6%80%BB%E7%BB%93/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>小样本数据扩增总结 | StrayInCosmos</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+      <img class="custom-logo-image" src="/uploads/custom-logo.jpg" alt="StrayInCosmos">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">StrayInCosmos</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Exploring the world</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Delta-encoder-an-effective-sample-synthesis-method-for-few-shot-object-recognition%EF%BC%88IBM-Research-AI-NIPS-2018%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">Delta-encoder: an effective sample synthesis method for few-shot object recognition（IBM Research AI, NIPS 2018）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Low-shot-visual-recognition-by-shrinking-and-hallucinating-features%EF%BC%88Facebook-AI-Research-CVPR-2017%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Low-shot visual recognition by shrinking and hallucinating features（Facebook AI Research, CVPR 2017）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#One-Shot-Learning-of-Scene-Locations-via-Feature-Trajectory-Transfer-CVPR-2016"><span class="nav-number">3.</span> <span class="nav-text">One-Shot Learning of Scene Locations via Feature Trajectory Transfer(CVPR 2016)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feature-Space-Transfer-for-Data-Augmentation-CVPR-2018"><span class="nav-number">4.</span> <span class="nav-text">Feature Space Transfer for Data Augmentation(CVPR 2018)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="nav-number">5.</span> <span class="nav-text">碎碎念</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Maggie Lee</p>
+  <div class="site-description" itemprop="description">A personal blog recording personal life</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Maggie22" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/28/%E5%B0%8F%E6%A0%B7%E6%9C%AC%E6%95%B0%E6%8D%AE%E6%89%A9%E5%A2%9E%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Maggie Lee">
+      <meta itemprop="description" content="A personal blog recording personal life">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StrayInCosmos">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          小样本数据扩增总结
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-28 16:48:15" itemprop="dateCreated datePublished" datetime="2021-03-28T16:48:15+08:00">2021-03-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-04-01 11:41:53" itemprop="dateModified" datetime="2021-04-01T11:41:53+08:00">2021-04-01</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ResearchLife/" itemprop="url" rel="index"><span itemprop="name">ResearchLife</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>寒假的时候针对小样本扩增这一块内容收集了很多文献，也看了很多文献。第一次有点科研的感觉，在这里做个总结。<br><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/1.png" alt="title_pic"></p>
+<span id="more"></span>
+
+<p>随着机器学习（特别是深度学习）的发展，它的问题也逐渐凸显出来。深度学习一般需要大量的数据集，才能训练到效果较好的模型。近年来，对小样本的研究越来越多。一方面，不是所有领域都有<strong>充足的样本</strong>用来训练模型，比如医学领域。另一方面，基于大量数据得到的深度学习模型训练也需要<strong>较高的代价</strong>，如设备资源、训练时长等等，若能从少量样本中学习概念知识，能在一定程度减小代价。</p>
+<p>按照综述《<strong>Generalizing from a Few Examples: A Survey on Few-Shot Learning</strong>》。先给出<strong>小样本学习（Few-Shot Learning, FSL）</strong>的定义：</p>
+<blockquote>
+<p>属于机器学习的一类任务，区别在于FSL用于目标任务的信息较少（训练集数量少）。</p>
+</blockquote>
+<p>综述里对小样本学习从不同角度分成了三个类型：<strong>1. 模型 2. 数据 3. 算法</strong>。我这篇博客想要讨论的<strong>数据扩增</strong>，就属于从<strong>数据</strong>角度来解决小样本学习问题。</p>
+<p>而从数据角度而言，又可以分成三种类型：1. 从<strong>训练集</strong>中转换样本；2. 从<strong>弱标签或无标签数据集</strong>中转换样本；3. 从<strong>相似数据集</strong>中转换样本。这张图比较容易理解：</p>
+<img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323095705808.png" alt="数据扩增以解决小样本问题" style="zoom:80%;" />
+
+<p>另外我认为，<strong>数据增强（Data Augmentation）</strong>也可以分成这样两种方法:1. 从<strong>基本图像处理</strong>进行增强，如裁剪、旋转、变化颜色等；2. 从<strong>特征</strong>进行扩增，如使用GAN合成样本、映射到特征空间内增强（SMOTE）、神经风格迁移</p>
+<blockquote>
+<p>借鉴了<a target="_blank" rel="noopener" href="https://www.jiqizhixin.com/articles/2019-12-04-10">这篇文章</a>，也是分成了类似的两类，第一类是基于基本图像处理技术，第二类是<strong>基于深度学习</strong>。我觉得也写得很好，但是我感觉第二类这样叫不太准确，SMOTE方法应该是不算深度学习的。</p>
+</blockquote>
+<p>《A survey on Image Data Augmentation for Deep Learning》是关于<strong>图像的数据增强</strong>综述。这篇文章更详细地阐述了相关方法的分类：</p>
+<blockquote>
+<p>The augmentations listed in this survey are <strong>geometric transformations, color space transformations, kernel filters, mixing images, random erasing, feature space augmentation, adversarial training, GAN-based augmentation, neural style transfer, and meta-learning schemes</strong>.</p>
+</blockquote>
+<p>接下来列出几篇做样本扩增的文献，主要是从训练集本身来合成新样本。下面四篇是综述中引用的文献：</p>
+<h1 id="Delta-encoder-an-effective-sample-synthesis-method-for-few-shot-object-recognition（IBM-Research-AI-NIPS-2018）"><a href="#Delta-encoder-an-effective-sample-synthesis-method-for-few-shot-object-recognition（IBM-Research-AI-NIPS-2018）" class="headerlink" title="Delta-encoder: an effective sample synthesis method for few-shot object recognition（IBM Research AI, NIPS 2018）"></a>Delta-encoder: an effective sample synthesis method for few-shot object recognition（IBM Research AI, NIPS 2018）</h1><p>基于<strong>自动编码器</strong>，学习能够用于合成<strong>新类别</strong>样本的模型。模型图：</p>
+<p><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323110113774.png" alt="delta-encoder架构"></p>
+<p><strong>(a)训练阶段</strong>: $X^s$ 和$Y^s$是来自同一个可见类的随机一对样本; Δ-encoder学习重建得到$\hat{X}^s$。 <strong>(b)样本合成阶段</strong> :$X^s$和$Y^s$是随机已知类中随机的一对样本，$Y^u$是新的未知类中的单个样本；Δ-encoder从新类中生成一个新的示例$\hat{X}^u$。</p>
+<p>本文希望学习到不同样本之间的<strong>可迁移的差异性</strong>，然后用到新样本上去。实验也是通过N-way K-shot的方法进行。</p>
+<p>训练阶段需要10个epoch达到收敛，每个epoch在Nvidia Tesla K40m GPU上跑20s。（我感觉挺快的？）</p>
+<h1 id="Low-shot-visual-recognition-by-shrinking-and-hallucinating-features（Facebook-AI-Research-CVPR-2017）"><a href="#Low-shot-visual-recognition-by-shrinking-and-hallucinating-features（Facebook-AI-Research-CVPR-2017）" class="headerlink" title="Low-shot visual recognition by shrinking and hallucinating features（Facebook AI Research, CVPR 2017）"></a>Low-shot visual recognition by shrinking and hallucinating features（Facebook AI Research, CVPR 2017）</h1><p>和上一篇一样，期望学习到样本间<strong>可迁移的差异性</strong>。即学习到的样本变换信息，可以用到别的类别上去（但是这两种类别也比较相似，如不同种类的鸟。本文通过对每个类别做聚类，判断质心距离的方法评估相似性）。</p>
+<p>此外，本文希望学习到一个<strong>生成器</strong>（文中提到是多层感知器），学习到样本间可迁移的差异性用到新类别上去。关于差异性迁移，可以通过下图来理解：</p>
+<p><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323112338424.png" alt="image-20210323112338424"></p>
+<p>以第一行为例，左边两张图都是小灰鸟，右边两张图都是小蓝鸟，分别属于两个类别。左边小灰鸟一个是以天空为背景，一个是以树叶为背景，模型将学习到这个差异性。这个差异性能够迁移到小蓝鸟上，当我们有以天空为背景的小蓝鸟照片时，通过差异性的迁移，就能得到以树叶为背景的小蓝鸟照片。</p>
+<p>PS：我还挺喜欢这个迁移差异性的思想，感觉挺有意思的。不过我感觉“模型可以学习到差异性”这个说法，有点抽象。</p>
+<h1 id="One-Shot-Learning-of-Scene-Locations-via-Feature-Trajectory-Transfer-CVPR-2016"><a href="#One-Shot-Learning-of-Scene-Locations-via-Feature-Trajectory-Transfer-CVPR-2016" class="headerlink" title="One-Shot Learning of Scene Locations via Feature Trajectory Transfer(CVPR 2016)"></a>One-Shot Learning of Scene Locations via Feature Trajectory Transfer(CVPR 2016)</h1><p>从一组图像上学习一个瞬态属性的特征轨迹，将轨迹转移到新的图像上生成某个属性（如晴天、阴天）在不同强度下对应的图像。图像举例：</p>
+<img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323144845585.png" alt="数据集举例" style="zoom:80%;" />
+
+<p>上图中，每一行表示一个照相机采集到的照片。对应的属性为sunny，在不同属性强度下的照片。</p>
+<p>本文希望从细粒度数据集中学习知识，然后基于新数据合成样本。文中提到，特征轨迹转移的方法基于两个假设：1. 通过图像的<strong>特征表示</strong>能够<strong>预测其瞬态属性</strong>；2. 这种瞬态属性与特征表示之间的<strong>函数关系</strong>能够建模为<strong>特征空间中的轨迹</strong>。</p>
+<p><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323145600859.png" alt="特征轨迹转移和合成图解"></p>
+<p>对于新图像，先用计算它<strong>在属性空间中的表示</strong>，得到一个对应的属性向量。迭代所有场景，<strong>对每个属性</strong>都学习到新样本的<strong>特征轨迹转移</strong>。最后，分别沿每个属性对应的转移轨迹预测对应的特征。最终对来自所有场景的预测值进行加权，得到合成图像。</p>
+<p>这篇我有点一知半解。看文章的公式，好像就用了一个线性模型来合成新样本。</p>
+<h1 id="Feature-Space-Transfer-for-Data-Augmentation-CVPR-2018"><a href="#Feature-Space-Transfer-for-Data-Augmentation-CVPR-2018" class="headerlink" title="Feature Space Transfer for Data Augmentation(CVPR 2018)"></a>Feature Space Transfer for Data Augmentation(CVPR 2018)</h1><p>同样是<strong>特征轨迹</strong>，这里的是<strong>姿态</strong>变化轨迹。用到<strong>解纠缠</strong>的思想，用两个编码器，将图像的<strong>外观</strong>和<strong>姿态</strong>两种属性分开来了。</p>
+<p><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323150601178.png" alt="特征空间转换示意图"></p>
+<p>上图所示，不同的图像特征向量，可以映射到外观空间中的同一点，映射到姿态空间中的不同点。</p>
+<p>本文的模型结构是下图：</p>
+<p><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/Research/small_samples_augmentation/image-20210323150827500.png" alt="FATTEN架构"></p>
+<h1 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h1><p>刚开始写这篇的时候，被老师叫去谈话了。这个突然就变成了我的课题- -</p>
+<p>加油吧！这个礼拜先写这么多，之后慢慢补充吧。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B0%8F%E6%A0%B7%E6%9C%AC/" rel="tag"># 小样本</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E6%89%A9%E5%A2%9E/" rel="tag"># 数据扩增</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/21/Leetcode-0221/" rel="prev" title="Leetcode0221">
+                  <i class="fa fa-chevron-left"></i> Leetcode0221
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/31/Colab%E8%BF%90%E8%A1%8Cpython%E4%BB%A3%E7%A0%81%E6%89%BE%E4%B8%8D%E5%88%B0%E8%B7%AF%E5%BE%84/" rel="next" title="Colab运行python代码找不到路径">
+                  Colab运行python代码找不到路径 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maggie Lee</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script async src="/js/cursor/clicklove.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
