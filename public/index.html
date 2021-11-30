@@ -253,7 +253,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-11-30 21:57:26 / 修改时间：21:59:26" itemprop="dateCreated datePublished" datetime="2021-11-30T21:57:26+08:00">2021-11-30</time>
+      <time title="创建时间：2021-11-30 21:57:26 / 修改时间：22:21:00" itemprop="dateCreated datePublished" datetime="2021-11-30T21:57:26+08:00">2021-11-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -275,61 +275,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><ul>
-<li>String变量既可以存放空串，也可以存放null。区分两者，空串是一个对象，有长度（0）和内容（空）。检查时，先检查是否为空，再检查长度是否为0.</li>
-</ul>
-<h2 id="String的长度"><a href="#String的长度" class="headerlink" title="String的长度"></a>String的长度</h2><p>String的长度涉及到码点与码元。以下对比几种方法：</p>
-<ul>
-<li>String.length()与String.codePointCount()：str.length()返回字符串str的码元数量，str.codePointCount(0, str.length())返回字符串str的码字数量。</li>
-<li>String.charAt()与String.codePointAt()：str.charAt(n)返回字符串str的码元；获取码字需要和String.offsetByCodePoints()配合使用，<code>int index = str.offsetByCodePoints(n); int cp = str.codePointAt(index)</code>，注意是返回int。</li>
-</ul>
-<p>之所以会有区别，是因为辅助字符是有两个码元的。</p>
-<p>遍历字符串码元的方法：codePoints()；判断一个码点是否为辅助字符：isSupplementaryCodePoint(int codePoint)；判断一个码元是否对应辅助字符的码元：isSurrogate(char)</p>
-<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><p>输入Scanner不多说，在输密码需要不显示的时候可以用console.readPassword()</p>
-<h3 id="格式化输出printf"><a href="#格式化输出printf" class="headerlink" title="格式化输出printf"></a>格式化输出printf</h3><p><strong>输出数字</strong></p>
-<p><code>%8.2f</code>：8表示宽度，.2表示小数，f是转换符</p>
-<p>在%之后可以加入标志（控制输出格式，如对齐方式、分组分隔符等）</p>
-<p><code>%,+.2f</code>：,表示分组（如1000写作1,000），+表示输出正负号</p>
-<p><strong>输出日期</strong></p>
-<p>以t开头，后跟转换符</p>
-<p><code>%tc</code>：输出完整的时间如<code>周二 11月 30 20:48:29 CST 2021</code></p>
-<p>可以对同一个Date对象操作，输出时需要指出被格式化的参数索引，有两种写法。&lt;是一种标志，表示格式化前一个的数值。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(<span class="string">&quot;%tB %&lt;te, %&lt;tY&quot;</span>, <span class="keyword">new</span> Date());</span><br><span class="line">System.out.printf(<span class="string">&quot;%1$tB %1$te, %1$tY&quot;</span>, <span class="keyword">new</span> Date());</span><br></pre></td></tr></table></figure>
-
-<p>PS：输出日期有java.text.SimpleDateFormat，可以方便表示。<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27093465/article/details/53034427">java 日期格式化– SimpleDateFormat 的使用</a></p>
-<h3 id="文件输入输出"><a href="#文件输入输出" class="headerlink" title="文件输入输出"></a>文件输入输出</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Scanner scanner = <span class="keyword">new</span> Scanner(Paths.get(<span class="string">&quot;input.txt&quot;</span>), StandardCharsets.UTF_8);</span><br><span class="line">PrintWriter printWriter = <span class="keyword">new</span> PrintWriter(<span class="string">&quot;output.txt&quot;</span>, StandardCharsets.UTF_8);</span><br></pre></td></tr></table></figure>
-
-<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><ul>
-<li><p>直接new一个数组：数字数组初始化为0，boolean数组初始化为false，对象数组初始化为null。</p>
-</li>
-<li><p>数组创建后不能改变大小，ArrayList可以改变大小。</p>
-</li>
-</ul>
-<p><strong>数组初始化</strong>方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;	<span class="comment">// new int[] &#123;1,2,3&#125;是匿名数组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span>[] b = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span>[] c = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</span><br><span class="line">    c[i] = i+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<p><strong>数组拷贝</strong></p>
-<p>记住，数组是引用类型，除了基本数据类型（整型，浮点型，布尔型，字符型）都是引用类型</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>[] b = a;	<span class="comment">// b和a指向同一个数组</span></span><br><span class="line">b[<span class="number">0</span>]=<span class="number">5</span>;			<span class="comment">// 此时a[0]也为5</span></span><br></pre></td></tr></table></figure>
-
-<p>如果要复制到一个新数组应该是这样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>[] b = Array.copyOf(a, a.length);</span><br><span class="line"><span class="comment">//可以用来增加数组长度</span></span><br><span class="line">a = Array.copyOf(a, a.length*<span class="number">2</span>);	<span class="comment">//多余的地方填0</span></span><br><span class="line"><span class="comment">//Array.copyOfRange(a, 0, a.length*2);</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>数组排序</strong>：Array.sort(a);</p>
-<p><strong>二维数组（多维数组）</strong></p>
-<ul>
-<li>Java中的二维数组，如<code>a[10][10]</code>，a是包含10个元素的数组，而其中每个元素又是包含10个元素的数组。我认为正是这个特性，使得Java可以定义不规则的二维数组，即<code>a[10][]</code>，其中每一行上的数组大小可以不同。C++中也有这种定义方式，不过会自动补全为0.</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[][] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>][];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    a[i] = <span class="keyword">new</span> <span class="keyword">int</span>[i+<span class="number">1</span>];</span><br><span class="line">System.out.println(a[<span class="number">0</span>][<span class="number">0</span>]);	<span class="comment">// 输出a[0][1]就会报数组越界的错误</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="大数值"><a href="#大数值" class="headerlink" title="大数值"></a>大数值</h2><p>BigInteger和BigDecimal可以处理任意精读的运算。但是不能用+*符号，只能用类的静态方法来实现。</p>
-<p>转换方法：<code>BigInteger big = BigInteger.valueOf(2);</code></p>
-<h2 id="关于编码、码元、码字等："><a href="#关于编码、码元、码字等：" class="headerlink" title="关于编码、码元、码字等："></a>关于编码、码元、码字等：</h2><p>一个有效的 Unicode 字符的二进制代码值被称作一个码点，也就是一个字符意味着一个码点。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/acmerfight/insight_python/blob/master/Unicode_and_Character_Sets.md"><strong>Unicode_and_Character_Sets</strong></a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/so_geili/article/details/105477780"><strong>java——char类型、码点和代码单元详解</strong></a></p>
-
+          <p>Java核心技术卷1笔记</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/11/30/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B71%E7%AC%94%E8%AE%B0-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -378,10 +332,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-04-11 22:51:57 / 修改时间：23:11:08" itemprop="dateCreated datePublished" datetime="2021-04-11T22:51:57+08:00">2021-04-11</time>
+      <time title="创建时间：2021-04-11 22:51:57" itemprop="dateCreated datePublished" datetime="2021-04-11T22:51:57+08:00">2021-04-11</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-30 22:14:07" itemprop="dateModified" datetime="2021-11-30T22:14:07+08:00">2021-11-30</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -460,10 +420,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-03-31 11:11:54 / 修改时间：11:17:45" itemprop="dateCreated datePublished" datetime="2021-03-31T11:11:54+08:00">2021-03-31</time>
+      <time title="创建时间：2021-03-31 11:11:54" itemprop="dateCreated datePublished" datetime="2021-03-31T11:11:54+08:00">2021-03-31</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-30 22:14:07" itemprop="dateModified" datetime="2021-11-30T22:14:07+08:00">2021-11-30</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -549,7 +515,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-04-01 11:41:53" itemprop="dateModified" datetime="2021-04-01T11:41:53+08:00">2021-04-01</time>
+        <time title="修改时间：2021-11-30 22:14:07" itemprop="dateModified" datetime="2021-11-30T22:14:07+08:00">2021-11-30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -628,10 +594,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-02-21 23:02:58 / 修改时间：23:06:41" itemprop="dateCreated datePublished" datetime="2021-02-21T23:02:58+08:00">2021-02-21</time>
+      <time title="创建时间：2021-02-21 23:02:58" itemprop="dateCreated datePublished" datetime="2021-02-21T23:02:58+08:00">2021-02-21</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-30 22:14:07" itemprop="dateModified" datetime="2021-11-30T22:14:07+08:00">2021-11-30</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -717,7 +689,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-02-21 23:07:52" itemprop="dateModified" datetime="2021-02-21T23:07:52+08:00">2021-02-21</time>
+        <time title="修改时间：2021-11-30 22:14:07" itemprop="dateModified" datetime="2021-11-30T22:14:07+08:00">2021-11-30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -796,10 +768,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-10-05 00:29:01 / 修改时间：00:29:41" itemprop="dateCreated datePublished" datetime="2020-10-05T00:29:01+08:00">2020-10-05</time>
+      <time title="创建时间：2020-10-05 00:29:01" itemprop="dateCreated datePublished" datetime="2020-10-05T00:29:01+08:00">2020-10-05</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-30 22:14:07" itemprop="dateModified" datetime="2021-11-30T22:14:07+08:00">2021-11-30</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -885,7 +863,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-10-05 21:20:02" itemprop="dateModified" datetime="2020-10-05T21:20:02+08:00">2020-10-05</time>
+        <time title="修改时间：2021-11-30 22:14:07" itemprop="dateModified" datetime="2021-11-30T22:14:07+08:00">2021-11-30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -964,10 +942,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-07-29 16:17:07 / 修改时间：16:23:47" itemprop="dateCreated datePublished" datetime="2020-07-29T16:17:07+08:00">2020-07-29</time>
+      <time title="创建时间：2020-07-29 16:17:07" itemprop="dateCreated datePublished" datetime="2020-07-29T16:17:07+08:00">2020-07-29</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-30 22:14:07" itemprop="dateModified" datetime="2021-11-30T22:14:07+08:00">2021-11-30</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -1045,10 +1029,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-07-09 20:26:31 / 修改时间：20:28:11" itemprop="dateCreated datePublished" datetime="2020-07-09T20:26:31+08:00">2020-07-09</time>
+      <time title="创建时间：2020-07-09 20:26:31" itemprop="dateCreated datePublished" datetime="2020-07-09T20:26:31+08:00">2020-07-09</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-30 22:14:07" itemprop="dateModified" datetime="2021-11-30T22:14:07+08:00">2021-11-30</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
