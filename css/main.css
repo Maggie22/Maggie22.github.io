@@ -2681,7 +2681,7 @@ mjx-container[display="true"] + br {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #63cbe4;
+  background: #7a9daf;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2702,7 +2702,7 @@ mjx-container[display="true"] + br {
   white-space: nowrap;
 }
 body {
-  background: url("images/snow_mountain.jpg");
+  background: url("/images/snow_mountain.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50% 50%;

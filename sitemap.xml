@@ -23,14 +23,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/about/index.html</loc>
+    <loc>http://example.com/categories/index.html</loc>
     
     <lastmod>2021-12-01</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/categories/index.html</loc>
+    <loc>http://example.com/about/index.html</loc>
     
     <lastmod>2021-12-01</lastmod>
     
@@ -44,14 +44,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/2019/04/28/%E9%9A%8F%E6%84%9F0428/</loc>
+    <loc>http://example.com/2019/06/10/%E9%9A%8F%E6%84%9F0609/</loc>
     
     <lastmod>2021-12-01</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/2019/06/10/%E9%9A%8F%E6%84%9F0609/</loc>
+    <loc>http://example.com/2019/04/28/%E9%9A%8F%E6%84%9F0428/</loc>
     
     <lastmod>2021-12-01</lastmod>
     
@@ -184,14 +184,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/2020/02/08/Python%E5%AD%A6%E4%B9%A0-Day3/</loc>
+    <loc>http://example.com/2020/02/12/Python%E5%AD%A6%E4%B9%A0-Day4/</loc>
     
     <lastmod>2021-12-01</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/2020/02/12/Python%E5%AD%A6%E4%B9%A0-Day4/</loc>
+    <loc>http://example.com/2020/02/08/Python%E5%AD%A6%E4%B9%A0-Day3/</loc>
     
     <lastmod>2021-12-01</lastmod>
     
@@ -240,14 +240,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/2020/07/29/Deep-Learning%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://example.com/2021/11/30/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B71%E7%AC%94%E8%AE%B0-1/</loc>
     
     <lastmod>2021-12-01</lastmod>
     
   </url>
   
   <url>
-    <loc>http://example.com/2021/11/30/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%8D%B71%E7%AC%94%E8%AE%B0-1/</loc>
+    <loc>http://example.com/2020/07/29/Deep-Learning%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2021-12-01</lastmod>
     
@@ -370,14 +370,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/%E5%AD%A6%E4%B9%A0Learning/</loc>
+    <loc>http://example.com/categories/Java/</loc>
     <lastmod>2021-12-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/categories/Java/</loc>
+    <loc>http://example.com/categories/%E5%AD%A6%E4%B9%A0Learning/</loc>
     <lastmod>2021-12-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
