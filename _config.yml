@@ -103,3 +103,5 @@ live2d:
     show: true
   react:
     opacity: 0.8
+  
+updated_option: "date"
