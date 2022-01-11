@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/heart_bulb_stars_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/heart_bulb_stars_16x16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gLGfRPT9se9YzlHqvbbRntI9WnsvXNTS7qjR1TrmrGM">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="模拟类型题目，持续更新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode刷题之模拟">
+<meta property="og:url" content="http://example.com/2022/01/11/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%A8%A1%E6%8B%9F/index.html">
+<meta property="og:site_name" content="StrayInCosmos">
+<meta property="og:description" content="模拟类型题目，持续更新">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-11T03:17:44.000Z">
+<meta property="article:modified_time" content="2022-01-11T03:17:44.000Z">
+<meta property="article:author" content="Maggie Lee">
+<meta property="article:tag" content="模拟">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/01/11/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%A8%A1%E6%8B%9F/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>Leetcode刷题之模拟 | StrayInCosmos</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+      <img class="custom-logo-image" src="/uploads/custom-logo.jpg" alt="StrayInCosmos">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">StrayInCosmos</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Exploring the world</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E5%8D%95"><span class="nav-number">1.</span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-number">1.1.</span> <span class="nav-text">1. 两数之和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80"><span class="nav-number">1.2.</span> <span class="nav-text">14. 最长公共前缀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#58-%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%8D%95%E8%AF%8D%E7%9A%84%E9%95%BF%E5%BA%A6"><span class="nav-number">1.3.</span> <span class="nav-text">58. 最后一个单词的长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#66-%E5%8A%A0%E4%B8%80"><span class="nav-number">1.4.</span> <span class="nav-text">66. 加一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#136-%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">1.5.</span> <span class="nav-text">136. 只出现一次的数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#168-Excel%E8%A1%A8%E5%88%97%E5%90%8D%E7%A7%B0"><span class="nav-number">1.6.</span> <span class="nav-text">168. Excel表列名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#171-Excel%E8%A1%A8%E5%88%97%E5%BA%8F%E5%8F%B7"><span class="nav-number">1.7.</span> <span class="nav-text">171. Excel表列序号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#263-%E4%B8%91%E6%95%B0"><span class="nav-number">1.8.</span> <span class="nav-text">263. 丑数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#268-%E4%B8%A2%E5%A4%B1%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">1.9.</span> <span class="nav-text">268. 丢失的数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#383-%E8%B5%8E%E9%87%91%E4%BF%A1"><span class="nav-number">1.10.</span> <span class="nav-text">383. 赎金信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#415-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%8A%A0"><span class="nav-number">1.11.</span> <span class="nav-text">415. 字符串相加</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%AD%E7%AD%89"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0"><span class="nav-number">2.1.</span> <span class="nav-text">2. 两数相加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2"><span class="nav-number">2.2.</span> <span class="nav-text">5. 最长回文子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Z-%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2"><span class="nav-number">2.3.</span> <span class="nav-text">6. Z 字形变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%95%B4%E6%95%B0-atoi"><span class="nav-number">2.4.</span> <span class="nav-text">8. 字符串转换整数 (atoi)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#38-%E5%A4%96%E8%A7%82%E6%95%B0%E5%88%97"><span class="nav-number">2.5.</span> <span class="nav-text">38. 外观数列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#43-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%B9%98"><span class="nav-number">2.6.</span> <span class="nav-text">43. 字符串相乘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#59-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-II"><span class="nav-number">2.7.</span> <span class="nav-text">59. 螺旋矩阵 II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84"><span class="nav-number">2.8.</span> <span class="nav-text">71. 简化路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#73-%E7%9F%A9%E9%98%B5%E7%BD%AE%E9%9B%B6"><span class="nav-number">2.9.</span> <span class="nav-text">73. 矩阵置零</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#89-%E6%A0%BC%E9%9B%B7%E7%BC%96%E7%A0%81"><span class="nav-number">2.10.</span> <span class="nav-text">89. 格雷编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#165-%E6%AF%94%E8%BE%83%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="nav-number">2.11.</span> <span class="nav-text">165. 比较版本号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#166-%E5%88%86%E6%95%B0%E5%88%B0%E5%B0%8F%E6%95%B0"><span class="nav-number">2.12.</span> <span class="nav-text">166. 分数到小数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#137-%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97-II"><span class="nav-number">2.13.</span> <span class="nav-text">137. 只出现一次的数字 II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#260-%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97-III"><span class="nav-number">2.14.</span> <span class="nav-text">260. 只出现一次的数字 III</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Maggie Lee</p>
+  <div class="site-description" itemprop="description">A personal blog recording personal life</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Maggie22" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/11/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E6%A8%A1%E6%8B%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Maggie Lee">
+      <meta itemprop="description" content="A personal blog recording personal life">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StrayInCosmos">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Leetcode刷题之模拟
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-01-11 11:17:44" itemprop="dateCreated datePublished" datetime="2022-01-11T11:17:44+08:00">2022-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">刷题</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>模拟类型题目，持续更新</p>
+<span id="more"></span>
+
+<p>参考网站：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/SharingSource/LogicStack-LeetCode/wiki/%E6%A8%A1%E6%8B%9F">模拟 · SharingSource/LogicStack-LeetCode Wiki</a></p>
+<p>Tips：</p>
+<ul>
+<li>其实一直不太理解模拟是什么意思…个人理解是模拟人碰到这个会怎么做（模拟“怎样才能得到答案”这个过程）</li>
+<li>哈希映射</li>
+<li>这个类型的题很明显地反映我Java用得不熟练………</li>
+</ul>
+<h1 id="简单"><a href="#简单" class="headerlink" title="简单"></a><strong>简单</strong></h1><h2 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1. 两数之和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum/">1. 两数之和</a></h2><ul>
+<li>咱就是说，经典题目</li>
+<li>除了暴力求解，就是用哈希表，但是哈希表的空间复杂度会高一些</li>
+</ul>
+<h2 id="14-最长公共前缀"><a href="#14-最长公共前缀" class="headerlink" title="14. 最长公共前缀"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-common-prefix/">14. 最长公共前缀</a></h2><ul>
+<li>String的一些方法：int indexOf(char ch)找元素下标，char charAt(int i)找下标对应的元素</li>
+<li>字符串可以相加。如果要加上一个字符可以写作：<code>str += String.valueOf(&#39;a&#39;)</code></li>
+<li>我先求了最短字符串的长度，再循环的，可以在循环中判断不要超出长度。</li>
+<li>还有一种思路是从最后开始看，即判断字符串1是否在字符串2中，不存在就减小字符串1（另外设置一个变量）</li>
+</ul>
+<h2 id="58-最后一个单词的长度"><a href="#58-最后一个单词的长度" class="headerlink" title="58. 最后一个单词的长度"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/length-of-last-word/">58. 最后一个单词的长度</a></h2><ul>
+<li>比较简单。</li>
+<li>用while比起用for，代码会更好看（三叶的回答真的，又能给出题解又能给出漂亮的代码）。</li>
+</ul>
+<h2 id="66-加一"><a href="#66-加一" class="headerlink" title="66. 加一"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/plus-one/">66. 加一</a></h2><ul>
+<li><p>模拟加法过程</p>
+</li>
+<li><p>注意最后可能要加一位。至于最后加一位，直接这样写就可以了（Wow~）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">digits = <span class="keyword">new</span> <span class="keyword">int</span>[len + <span class="number">1</span>];</span><br><span class="line">digits[<span class="number">0</span>] = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>为什么这样可以呢，不是复制了，而是取巧！因为最后要加一位的情况只有999到1000这一类，这个时候除了第一位都是0，而Java的int数组在初始化的时候就默认初始化为0！我靠！</p>
+</li>
+</ul>
+<h2 id="136-只出现一次的数字"><a href="#136-只出现一次的数字" class="headerlink" title="136. 只出现一次的数字"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number/">136. 只出现一次的数字</a></h2><ul>
+<li>和第268题很像，不过268是固定范围内的数字，所以可以先相加再减出结果</li>
+<li>用位运算，异或即可</li>
+</ul>
+<h2 id="168-Excel表列名称"><a href="#168-Excel表列名称" class="headerlink" title="168. Excel表列名称"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/excel-sheet-column-title/">168. Excel表列名称</a></h2><ul>
+<li>思路参考了二进制、十六进制的转换方法，但是这里从1而不是从0开始，验算的时候发现需要先减1。</li>
+<li>另外要注意<code>for</code>循环中<code>n1</code>和<code>n2</code>的前后关系！</li>
+</ul>
+<h2 id="171-Excel表列序号"><a href="#171-Excel表列序号" class="headerlink" title="171. Excel表列序号"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/excel-sheet-column-number/">171. Excel表列序号</a></h2><ul>
+<li>和十进制一样</li>
+</ul>
+<h2 id="263-丑数"><a href="#263-丑数" class="headerlink" title="263. 丑数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ugly-number/">263. 丑数</a></h2><ul>
+<li>2、3、5每个都除一下，每个都要除到不能再除为止（即余数不为零）</li>
+<li>我设了一个变量保存余数，发现直接写在while条件里面会更好看，代码还是得看三叶姐姐：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ugly-number/solution/gong-shui-san-xie-jian-dan-de-fen-qing-k-dlvg/">【宫水三叶】简单的分情况讨论题</a></li>
+</ul>
+<h2 id="268-丢失的数字"><a href="#268-丢失的数字" class="headerlink" title="268. 丢失的数字"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/missing-number/">268. 丢失的数字</a></h2><ul>
+<li><p>我是<strong>相加然后求差</strong>~</p>
+</li>
+<li><p>先排序后求。排序方法：Arrays.sort(nums)</p>
+</li>
+<li><p>找缺失数、找出现一次数都是<strong>异或</strong>的经典应用。 ——三叶姐姐</p>
+<p>异或性质：$0 \oplus x=x$，$x\oplus x=0$</p>
+<p>所以如果要找缺失数，就把完整序列和0异或一次，再和当前序列异或一次，得到的就是缺失数啦！</p>
+</li>
+</ul>
+<h2 id="383-赎金信"><a href="#383-赎金信" class="headerlink" title="383. 赎金信"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ransom-note/">383. 赎金信</a></h2><ul>
+<li>因为字符串由26个小写字母组成，所以只要先统计magazine里的字母，再减去ransomNote里的字母出现次数就可以了</li>
+<li>注意magazine的字符只能用一次，<strong>当然也可以不用</strong>（谁想当然了？我想当然了）</li>
+</ul>
+<h2 id="415-字符串相加"><a href="#415-字符串相加" class="headerlink" title="415. 字符串相加"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/add-strings/">415. 字符串相加</a></h2><p>也是需要关注代码更优雅的一个写法</p>
+<ul>
+<li>因为想要用到字符串反转，所以得用StringBuilder不用String，StringBuilder可以直接append数字。</li>
+<li>更简洁明了的表示：三元运算符；超出数字的部分就是0。</li>
+<li>注意最后的进位</li>
+<li>做完这一题就可以去做<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/multiply-strings/">43. 字符串相乘</a></li>
+</ul>
+<h1 id="中等"><a href="#中等" class="headerlink" title="中等"></a><strong>中等</strong></h1><h2 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/add-two-numbers/">2. 两数相加</a></h2><ul>
+<li>模拟两式相加的过程</li>
+<li>注意点见链表部分：<a target="_blank" rel="noopener" href="https://cosmos227.top/2021/12/29/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E9%93%BE%E8%A1%A8/#%E4%B8%AD%E7%AD%89">Leetcode刷题之链表 | StrayInCosmos</a></li>
+</ul>
+<h2 id="5-最长回文子串"><a href="#5-最长回文子串" class="headerlink" title="5. 最长回文子串"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-substring/">5. 最长回文子串</a></h2><p>经典题，但我不会（只能想到暴力循环）</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-substring/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-bao-gu/">详细通俗的思路分析，多解法 - 最长回文子串 - 力扣（LeetCode）</a></p>
+<ul>
+<li>动态规划</li>
+</ul>
+<p>先定义<strong>状态S(i, j)<strong>表示从i到j的子字符串，是否为回文串表示为P(i,j)。</strong>如果一个字符串是回文串，它去掉两端还是一个回文串</strong>，这就有了<strong>状态转移方程</strong>，$P(i,j)=P(i+1,j-1) \and (S_i == S_j)$。边界条件，长度为1的子字符串为回文串，长度为2的子字符串若字符相等也为回文串。</p>
+<ul>
+<li>最长公共子串（回文就是正着反着读都一样，把原始字符串倒置后找两者最长公共子字符串）</li>
+</ul>
+<p>用动态规划的思想做，同时在找到最长公共子串的时候也要确定下标是不是匹配（只需要看结尾下标是不是匹配）。</p>
+<ul>
+<li>中心扩展法</li>
+</ul>
+<p>列举所有可能的回文中心并向两边进行拓展。注意字符串长度为奇数和偶数两种情况，奇数时以一个字符作中心，偶数以两个字符作为中心。</p>
+<ul>
+<li>Manacher算法</li>
+</ul>
+<p>只有O(n)的算法复杂度。插入#符号来考虑偶回文串，利用对称性。</p>
+<p>只能处理回文串问题，一般面试不考，略过。</p>
+<h2 id="6-Z-字形变换"><a href="#6-Z-字形变换" class="headerlink" title="6. Z 字形变换"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/zigzag-conversion/">6. Z 字形变换</a></h2><ul>
+<li>利用好StringBuilder类</li>
+<li>设置标志位，确定是否需要变换行索引</li>
+<li>对String对象做遍历的时候，可以用：<code>for(char c: str.toArray()) ...</code></li>
+</ul>
+<h2 id="8-字符串转换整数-atoi"><a href="#8-字符串转换整数-atoi" class="headerlink" title="8. 字符串转换整数 (atoi)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/string-to-integer-atoi/">8. 字符串转换整数 (atoi)</a></h2><ul>
+<li>Integer.MAX_VALUE和Integer.MIN_VALUE</li>
+<li>我用了long类型来保存，从而可以判断是否越界，return的时候再换回去就行。</li>
+<li>但是保持用int类型会更好，判断的方法是在<strong>把result乘十之前</strong>，判断一下<strong>result有没有大于Integer.MAX_VALUE/10</strong>，或者<strong>如果等于Integer.MAX_VALUE/10时，当前位置的数字有没有大于Integer.MAX_VALU%10</strong></li>
+</ul>
+<h2 id="38-外观数列"><a href="#38-外观数列" class="headerlink" title="38. 外观数列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/count-and-say/">38. 外观数列</a></h2><p>这道题目理解题意都花了会时间（doge</p>
+<ul>
+<li>找重复序列的方法需要更优雅一点，一开始自己想的越想越复杂，简洁明了的才是好办法~</li>
+<li>设置双指针，一个在标记点，另一个移动直到和标记点不同的索引为止。</li>
+<li>另外整数合并到字符串上，用Integer.toString()或者直接加到字符串上，但是要注意的是直接数字加字符会出错（比如<code>1+&#39;a&#39;</code>)，这个时候加上一个空字符串即可（比如<code>1+&quot;&quot;+&#39;a&#39;</code>）</li>
+</ul>
+<h2 id="43-字符串相乘"><a href="#43-字符串相乘" class="headerlink" title="43. 字符串相乘"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/multiply-strings/">43. 字符串相乘</a></h2><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/add-strings/">415. 字符串相加</a>的下一题</li>
+<li>我自己用的是模拟列竖式手算然后两个字符串相加的过程，和415这题一样要注意<strong>进位</strong>的问题！同时要注意补零，以及判断是否有字符串为”0”，这时只要输出一个”0”而不是”0000”</li>
+<li>看了几个题解都提到优化竖式，方法比较巧妙，讲解可以看：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/multiply-strings/solution/you-hua-ban-shu-shi-da-bai-994-by-breezean/">优化版竖式(打败99.4%)</a>；代码我更喜欢三叶写的：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/multiply-strings/solution/zhi-yao-ni-hui-shou-suan-cheng-fa-zhe-ti-ainl/">只要你会手算乘法，这题能能过 ~</a></li>
+</ul>
+<h2 id="59-螺旋矩阵-II"><a href="#59-螺旋矩阵-II" class="headerlink" title="59. 螺旋矩阵 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/spiral-matrix-ii/">59. 螺旋矩阵 II</a></h2><ul>
+<li>看到这个<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/spiral-matrix-ii/solution/spiral-matrix-ii-mo-ni-fa-she-ding-bian-jie-qing-x/">题解</a>的时候，我只会”Wow~~”</li>
+</ul>
+<h2 id="71-简化路径"><a href="#71-简化路径" class="headerlink" title="71. 简化路径"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/simplify-path/">71. 简化路径</a></h2><ul>
+<li><p>用<strong>栈</strong>。注意考虑边界条件，栈为空的时候返回”/“；另外用好条件判断（if，else if）；可以用split来划分出目录名。</p>
+</li>
+<li><p>Java中的<strong>Deque</strong>，对Queue的拓展，实现了头尾都可以进出。Deque是一个接口，可以用LinkedList或ArrayDeque来实现（两者区别，ArrayDeque是不能用索引操作的，因此如果只用到头尾，ArrayDeque的效率更高）</p>
+</li>
+<li><p>pollLast和removeLast，都是删除最后元素，但是后者不允许数组为空，前者允许，为空时返回null。</p>
+</li>
+</ul>
+<h2 id="73-矩阵置零"><a href="#73-矩阵置零" class="headerlink" title="73. 矩阵置零"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/set-matrix-zeroes/">73. 矩阵置零</a></h2><ul>
+<li>某行或某列有零，该行或列全为零，利用这个特点来记录标志</li>
+<li>需要设置标志，表示该位置是否需要置零。除了额外m+n的空间，直接在当前数组上设置标记，会使额外空间更小。</li>
+<li>注意特殊情况的记录，即第一行、第一列上有为零的情况。</li>
+</ul>
+<h2 id="89-格雷编码"><a href="#89-格雷编码" class="headerlink" title="89. 格雷编码"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/gray-code/">89. 格雷编码</a></h2><ul>
+<li>直接看答案了，记住得了</li>
+<li>没有理解为什么求第几个数的格雷码就是$g(i) = b(i)\oplus b(i/2) $。先搁着，真遇到了就用对称来求解。</li>
+</ul>
+<h2 id="165-比较版本号"><a href="#165-比较版本号" class="headerlink" title="165. 比较版本号"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/compare-version-numbers/">165. 比较版本号</a></h2><ul>
+<li>直接按序比较即可，本来想说用栈，其实是把简单问题复杂化了。对于前导零，和别的数字一样计算即可。</li>
+<li>可以用split对字符串分组，此时注意要用<code>split(&quot;\\.&quot;)</code>，因为split是利用正则来分割的，对于<code>.</code>之类的特殊符号前面要加<code>\\</code>转义符。</li>
+<li>也可以直接用while，到字符<code>.</code>为止即可。</li>
+</ul>
+<h2 id="166-分数到小数"><a href="#166-分数到小数" class="headerlink" title="166. 分数到小数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/fraction-to-recurring-decimal/">166. 分数到小数</a></h2><ul>
+<li>模拟手算除法的过程，如果遇到已经出现过的余数，循环就开始了，所以要<strong>记录余数以及出现的位置</strong>。可以用哈希表来记录。</li>
+<li>注意模拟除法手算的过程，一直都是和余数有关的。</li>
+<li>另外，要避免计算溢出，因此要把int转换为long来计算。注意在加负号之后，需要把分子和分母取绝对值。</li>
+<li>参考题解：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/fraction-to-recurring-decimal/solution/gong-shui-san-xie-mo-ni-shu-shi-ji-suan-kq8c4/">【宫水三叶】模拟竖式计算（除法）</a></li>
+</ul>
+<h2 id="137-只出现一次的数字-II"><a href="#137-只出现一次的数字-II" class="headerlink" title="137. 只出现一次的数字 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number-ii/">137. 只出现一次的数字 II</a></h2><ul>
+<li><p>朴素方法用哈希表</p>
+</li>
+<li><p>常数空间复杂度的用位运算。因为除了一个数字出现一次以外，别的数字出现三次，利用这一点取余数操作。具体而言，首先统计每一位上的数（求和），如果统计得到的数可以被3整除，说明多出来的那个数字为0（其余为1或0的相加结果都会被3整除）；若统计得到的数不能被3整除，说明多出来的那个数字为1。由此可以保存这个数字每一位的值，再从二进制转为十进制返回即可。</p>
+</li>
+<li><p>从操作上来看，由于数字是int类型，所以用int[32] cnt的数组保存每一位上的值即可。在统计时，外循环是对nums中的每个数，内循环是对每一位（一共32位）统计到cnt中去。这里可以用右移操作与1比较，从而得到每一位上的值，当与1相等时，cnt对应位的值++。而在从二进制数组返回得到十进制值时，可以用左移操作来加。</p>
+</li>
+<li><p>另外还有有限状态自动机，这个看得一知半解，也先搁着了~（可参考<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number-ii/solution/single-number-ii-mo-ni-san-jin-zhi-fa-by-jin407891/">只出现一次的数字 II（有限状态自动机 + 位运算，清晰图解）</a>）</p>
+</li>
+</ul>
+<h2 id="260-只出现一次的数字-III"><a href="#260-只出现一次的数字-III" class="headerlink" title="260. 只出现一次的数字 III"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number-iii/">260. 只出现一次的数字 III</a></h2><ul>
+<li><p>朴素方法用哈希表来保存出现过的数字，但题目要求空间复杂度是常数的，能想到用位运算，但是不会了</p>
+</li>
+<li><p>位运算看了一会才有点理解。首先所有数字异或，得到的结果一定不为零（因为有两个只出现一次的数字）。拿这个异或结果，取任意一个有效位（即值为1的位）（这个位表示这两个数字在这一位上是不一样的，一个在这一位上为1另一个为0），得到一个mask（比如第二位有效则mask是<code>0010</code>)（这里有一种简洁的方法，取最低有效位LSB）。再用这个mask去和所有数字异或，就可以把数字们分成两组了，即这个位为1的是一组，这个位为0的是另一组，因为其他数字都是出现两次的，所以每组异或出来的结果就是我们想要找的数字。</p>
+</li>
+<li><p>异或：<code>^</code>；与：<code>&amp;</code>；或：<code>|</code>（注意和逻辑判断区分开）</p>
+</li>
+<li><p>哈希表方法<code>getOrDefault(key, defaultValue)</code>：获取指定 key 对应对 value，如果找不到 key ，则返回设置的默认值</p>
+</li>
+</ul>
+<blockquote>
+<p> 参考题解：</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number-iii/solution/cai-yong-fen-zhi-de-si-xiang-jiang-wen-ti-jiang-we/">采用分治的思想将问题降维</a></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/single-number-iii/solution/gong-shui-san-xie-yi-ti-shuang-jie-ha-xi-zgi4/">【宫水三叶】一题双解 :「哈希表」&amp;「异或」</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag"># 模拟</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/29/Leetcode%E5%88%B7%E9%A2%98%E4%B9%8B%E9%93%BE%E8%A1%A8/" rel="prev" title="Leetcode刷题之链表">
+                  <i class="fa fa-chevron-left"></i> Leetcode刷题之链表
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maggie Lee</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script async src="/js/cursor/clicklove.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
