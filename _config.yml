@@ -82,7 +82,7 @@ theme: hexo-theme-next-master
 ## Docs: https://hexo.io/docs/deployment.html
 deploy: 
   type: git
-  repo: https://github.com/Maggie22/Maggie22.github.io.git
+  repo: git@github.com:Maggie22/Maggie22.github.io.git
   branch: master
 
 live2d:
