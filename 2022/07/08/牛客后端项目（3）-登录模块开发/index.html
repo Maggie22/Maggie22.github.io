@@ -24,21 +24,23 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="三体Ⅲ、阿Q正传、第二性、你当像鸟飞往你的山、我的天才女友、梨泰院class">
+<meta name="description" content="登录模块，比注册做起来熟练了，项目开发中的小细节很多">
 <meta property="og:type" content="article">
-<meta property="og:title" content="三月观影读书">
-<meta property="og:url" content="http://example.com/2020/04/07/%E4%B8%89%E6%9C%88%E8%A7%82%E5%BD%B1%E8%AF%BB%E4%B9%A6/index.html">
+<meta property="og:title" content="牛客后端项目（3）-登录模块开发">
+<meta property="og:url" content="http://example.com/2022/07/08/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/index.html">
 <meta property="og:site_name" content="StrayInCosmos">
-<meta property="og:description" content="三体Ⅲ、阿Q正传、第二性、你当像鸟飞往你的山、我的天才女友、梨泰院class">
+<meta property="og:description" content="登录模块，比注册做起来熟练了，项目开发中的小细节很多">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-04-07T14:36:59.000Z">
-<meta property="article:modified_time" content="2020-04-07T14:36:59.000Z">
+<meta property="og:image" content="http://example.com/2022/07/08/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/FILES/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91.md/img-20220708145518.JPG">
+<meta property="article:published_time" content="2022-07-08T08:22:07.000Z">
+<meta property="article:modified_time" content="2022-07-08T08:22:07.000Z">
 <meta property="article:author" content="Maggie Lee">
-<meta property="article:tag" content="blog">
+<meta property="article:tag" content="牛客网后端">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/07/08/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/FILES/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91.md/img-20220708145518.JPG">
 
 
-<link rel="canonical" href="http://example.com/2020/04/07/%E4%B8%89%E6%9C%88%E8%A7%82%E5%BD%B1%E8%AF%BB%E4%B9%A6/">
+<link rel="canonical" href="http://example.com/2022/07/08/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
 
 
 <script class="page-configurations">
@@ -50,7 +52,7 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>三月观影读书 | StrayInCosmos</title>
+<title>牛客后端项目（3）-登录模块开发 | StrayInCosmos</title>
   
 
 
@@ -164,7 +166,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E4%BD%93%E2%85%A2"><span class="nav-number">1.</span> <span class="nav-text">三体Ⅲ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%BFQ%E6%AD%A3%E4%BC%A0"><span class="nav-number">2.</span> <span class="nav-text">阿Q正传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">第二性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%A0%E5%BD%93%E5%83%8F%E9%B8%9F%E9%A3%9E%E5%BE%80%E4%BD%A0%E7%9A%84%E5%B1%B1"><span class="nav-number">4.</span> <span class="nav-text">你当像鸟飞往你的山</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E5%A4%A9%E6%89%8D%E5%A5%B3%E5%8F%8B"><span class="nav-number">5.</span> <span class="nav-text">我的天才女友</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A2%A8%E6%B3%B0%E9%99%A2class"><span class="nav-number">6.</span> <span class="nav-text">梨泰院class</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">会话管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97"><span class="nav-number">2.</span> <span class="nav-text">登录模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">密码加密问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E7%99%BB%E5%BD%95%E4%BF%A1%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text">显示登录信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-number">3.1.</span> <span class="nav-text">拦截器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.</span> <span class="nav-text">问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%A6%E5%8F%B7%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">账号设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0%E5%A4%B4%E5%83%8F"><span class="nav-number">4.1.</span> <span class="nav-text">上传头像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E5%90%88%E6%B3%95%E6%80%A7%E9%AA%8C%E8%AF%81"><span class="nav-number">4.1.1.</span> <span class="nav-text">图像合法性验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E7%A0%81%E4%BF%AE%E6%94%B9"><span class="nav-number">4.2.</span> <span class="nav-text">密码修改</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E7%99%BB%E5%BD%95%E7%8A%B6%E6%80%81"><span class="nav-number">5.</span> <span class="nav-text">检查登录状态</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -232,7 +234,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/04/07/%E4%B8%89%E6%9C%88%E8%A7%82%E5%BD%B1%E8%AF%BB%E4%B9%A6/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/08/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -245,7 +247,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          三月观影读书
+          牛客后端项目（3）-登录模块开发
         </h1>
 
         <div class="post-meta-container">
@@ -256,7 +258,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-04-07 22:36:59" itemprop="dateCreated datePublished" datetime="2020-04-07T22:36:59+08:00">2020-04-07</time>
+      <time title="创建时间：2022-07-08 16:22:07" itemprop="dateCreated datePublished" datetime="2022-07-08T16:22:07+08:00">2022-07-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -264,7 +266,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%94%9F%E6%B4%BBLife/" itemprop="url" rel="index"><span itemprop="name">生活Life</span></a>
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">项目开发笔记</span></a>
         </span>
     </span>
 
@@ -278,29 +280,56 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>三体Ⅲ、阿Q正传、第二性、你当像鸟飞往你的山、我的天才女友、梨泰院class</p>
+        <p>登录模块，比注册做起来熟练了，项目开发中的小细节很多</p>
 <span id="more"></span>
 
-<h2 id="三体Ⅲ"><a href="#三体Ⅲ" class="headerlink" title="三体Ⅲ"></a>三体Ⅲ</h2><p>正如我之前说的，这一部比前两部都更吸引我。最后书中呈现出的景象与现在的地球，现在的宇宙相比，都已经面目全非。<br>穿过了一千八百多万年的岁月，我有一种超然的感觉，像书里说的“以上帝视角看蚁穴”。人的一生终究是短暂而渺小的。在我们的时间尺度中漫长的一生，在宇宙的时间尺度中只是比眨眼更微小的瞬间。有些人的存在，改变了历史走向；而大多数人的存在，最后也只会被遗忘。对于宇宙之神来说不重要的瞬间，却是我的全部。</p>
-<p>大家都骂程心，我觉得她每一个引导文明走向灭亡的选择，都不全 是她的错。以当时的情况而言，谁也不一定都能做出最好的选择。我也不能说喜欢这个角色，只是不讨厌。想起三体Ⅱ的豆瓣短评，说大刘笔下的女性角色都这么蠢，我感觉到了…</p>
-<p>还有程心和关一帆走在一起，而AA和云天明走在一起，这样的结局是有点意外的，莫名其妙的？</p>
-<p>书里好几个点展开一下又是一本书，很期待这个系列的续作，虽然不知道会不会有。</p>
-<h2 id="阿Q正传"><a href="#阿Q正传" class="headerlink" title="阿Q正传"></a>阿Q正传</h2><p>阿Q啊，就是一个普普通通又没什么文化的人。但是他也一心想要变好的，但又不太懂，只能想着法子去学别人的样，又加上自己寻思出来的办法。他虽如此，也是很有自尊的，绝不想被人欺负，也不想被人看扁，就是不会写字要在纸上画圆，也一定要卯足了劲地把圆画圆了。即使要死了，也要继续着“精神胜利法”聊以自慰。</p>
-<p>若他死后还能听见人们纷纷的议论，大抵也会想：人生天地间，大约本来有时也未免…</p>
-<p>站在阿Q的角度看他经历的所有事情，所有感觉都不一样了。全篇没有一处明写“苦”，但我读来怎么这么苦呢…对于社会，只是一个草民被枪毙了，对于旁人，也只是阿Q一定干了什么坏事被枪毙了，而对于阿Q，到底为什么要被枪毙呢？也不知道原因，寻思着人生大概本来也就是这样的吧。</p>
-<p>好苦好苦，我说不出来。</p>
-<p>在刚开始看书的时候，我也会嘲笑阿Q这个人，他的价值观和他的言行。后来他死的时候，我觉得很苦。怎么说呢？我觉得他很无辜，他究竟做错了什么要遭得这样的罪？他即使在临死的时候，也跟平常并无两样。<br>我有种感觉，有点文化的人仿佛站在可以随意摆布他的高处。再结合写作背景就更明白一些。国内掀起了革命，却只停留在资产阶级与地主阶级，革命似乎只与这些阶级联系起来，却没有考虑包括农民在内的无产阶级。</p>
-<h2 id="第二性"><a href="#第二性" class="headerlink" title="第二性"></a>第二性</h2><p>什么是女人？女人为什么要被作为他者？从基本的生物学看起，女性深深地受到物种的制约，生育的要求极大地影响着女性的一生，从青春期到更年期。直到更年期后，女人重新获得内分泌上的平衡，表现出全新的活力。<br>“在所有雌性哺乳动物中，女人是受到异化程度最高的，并且最激烈地拒绝这种异化。”<br>“她要确定自身为个体，要起来反抗命运，所以她的命运显得更为悲苦。”<br>但是生物学上的论据并不能作为女人成为他者的原因。也并不能说明男人与女人之间孰优孰劣。它们是不可磨灭的事实，但本身并没有什么意义。在解释原因的时候，我们应该从人出发，从存在出发去界定。</p>
-<p>过去我一直觉得更年期的到来，就是女人的结束，为此感到悲哀。现在看来，生育与女人捆绑在一起的思想早就在我的脑子里根深蒂固。从青春期到更年期，女人一直受到无法摆脱的物种制约。</p>
-<p>我在我母亲身上看到了根植于我们心中的观念。我越来越感受到自己在成为一个独立的人，站在这样一个角度，母亲的形象越来越清晰。她要从家庭中获得对自身的肯定，她也有作为个体和作为他者之间的挣扎。我有点说不明白，理解也不一定对。但是我真的很心疼她，我们女性都被看上去理所当然却错误腐烂的观念所束缚。</p>
-<p>我很小的时候就会想：男孩子做得到的事情，我也要做到。我一直想要证明我们女生可以不比男生差。我也从来没有问过自己：为什么在大家的观念里，女生会比男生差？为什么我要以男生作为自己的目标？为什么我要去成为另一个性别？</p>
-<p>读了一半多，因为社科类的书籍，我总是读读就会走神…</p>
-<h2 id="你当像鸟飞往你的山"><a href="#你当像鸟飞往你的山" class="headerlink" title="你当像鸟飞往你的山"></a>你当像鸟飞往你的山</h2><p>“决定你是谁的最强大的因素来自你的内心。”“她只是一个穿着漂亮衣服的伦敦人。知道她相信自己。那时，她穿什么衣服已经无关紧要了。”<br>我想起我的小学。我一直在试着成为那种人。但是我觉得我不是。拥有的一切似乎都不应该属于我。<br>我突然明白了余华曾经在朗读者里说的：“离开成就了我。”我也明白了，我要离开。我也当像鸟，飞往我的山。</p>
-<p>这本书教我这两个道理：拥有<strong>自己</strong>的思想，去评价不同的思想、历史与观点。以及，你有权利追求更好的，而不需要感到羞耻。</p>
-<p>摘录几条我感触比较深的几句话：<br>“汇而构成人一生的所有决定——人们共同或者独自做出的那些决定，聚合起来，制造了每一桩单独事件。沙粒不可计数，叠压成沉积物，然后成为岩石。”<br>“我看到的是一个坚不可摧、像石头一样难以对付的自己。起初我仅仅是让自己相信这一点，直到有一天它变成了现实。然后我才能坦诚地告诉自己，这对我没有影响，因为没有什么可以影响我。我不明白我的这种正确是多么病态，不明白自己是如何掏空了自己。尽管我一直被那晚的后果所困扰，但我误解了最重要的事实：它没有影响我，这本身就是它的影响。”<br>“承认不确定性，就是被迫承认自己的软弱和无能，但也意味着你相信你自己。”<br>“只有我们自己才能解放我们的思想。”<br>“评价多种思想、多种历史和多种观点的能力是自我创造力的核心。”<br>“历史是由谁书写的呢？我想，是我。”<br>“你可以用很多说法来称呼这个自我：转变，蜕变，虚伪，叛逆。而我称之为：教育。”</p>
-<h2 id="我的天才女友"><a href="#我的天才女友" class="headerlink" title="我的天才女友"></a>我的天才女友</h2><p>看完了HBO的两季剧集。角色选人特别棒，没看过原著，但是每一个人的性格都表现得淋漓尽致，小时候和青年时代的角色也有几分相像。<br>莱农和莉拉这两个角色我都很喜欢。我心疼莉拉。她天赋过人，有着崇高又坚定的内心。她早就知道自己是庶民，整个城区都是庶民，渴望改变却无法改变。她心中有一块纯净的地方，不以外界为转移。但是她从骨子里散发出自卑，是因为她知道自己缺少教育，自己的眼界都局限在这个街区。<br>完全相反的莱农从小就讨人喜爱。她也一样散发出自卑，是因为她从小都在莉拉的影子里。莱农一直在怀疑：我比她更好吗？我有她那么好吗？即使在她决定听从自己内心之后，在看到莉拉的日记时依然觉得恐惧。莉拉的痛苦源自“发现了问题，却无法解决问题”。她聪明有思想，不想做一个庶民，更不想自己的后代依然是庶民。她做出各种选择，希望找到出口，得到改变。<br>莱农和莉拉互相成就了对方。这部作品反映的不止是她们二人间的战争与友谊。还有整个社会，包括男权社会中的女性、原生家庭等等。</p>
-<p>之后想找到原著来看，看到原著里的一段话，我发现文字表达的内容会比画面更丰富。</p>
-<h2 id="梨泰院class"><a href="#梨泰院class" class="headerlink" title="梨泰院class"></a>梨泰院class</h2><p>一开始一口气看到最新一集，后来看着看着就不香了。<br>男主几乎靠着女主一路发展起来，而且这发展得也太顺了吧？结局几乎毫无悬念（但是我还没看）。而且我觉得男女主没有CP感。</p>
+<h1 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h1><p>Cookie是HTTP的标准，Session是JavaEE的标准，Session还是基于Cookie的。</p>
+<p><strong>设置Cookie</strong>：一个cookie是一个键值对，需要对response添加cookie才会送到浏览器去。生存时间默认是关了浏览器就不在了。</p>
+<p><strong>设置Session</strong>：SpringMVC的控制器方法中作为参数直接获得，首次访问服务器时会生成一个sessionId并作为cookie保存到浏览器，下一次访问服务器时会携带这个sessionId对session内容进行读取</p>
+<p>Session在<strong>分布式服务器</strong>遇到的问题：分布式服务器一般会使用负载均衡策略，当浏览器首次访问时，假设此时在服务器A上创建了一个Session，而浏览器再次访问时可能会由其他服务器B进行处理，而服务器B可能没有session，此时就会出错。<br>解决办法：</p>
+<ol>
+<li>对于同一个浏览器请求，每次由同一个服务器处理。缺点：有悖“负载均衡”</li>
+<li>在所有服务器上都有一个Session备份。缺点：同步耗时、占用空间</li>
+<li>把所有Session存在一个单体服务器上。缺点：有悖“分布式”，只能访问一个服务器不仅会产生性能瓶颈，还有挂掉的风险</li>
+<li><strong>将数据放到数据库上，同时为了减小例如Mysql数据库要读硬盘的性能影响，用NoSql数据库，如Redis。</strong></li>
+</ol>
+<h1 id="登录模块"><a href="#登录模块" class="headerlink" title="登录模块"></a>登录模块</h1><p><strong>需求</strong>：用户输入用户名、密码、验证码，进行验证与登录。</p>
+<p>设计一个数据结构来记录登录状态，ticket作为登录凭证，用expired记录过期时间，login_ticket表结构<br>字段名：id, user_id, ticket, status, expired</p>
+<p><img src="./FILES/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91.md/img-20220708145518.JPG" alt="登录流程图"></p>
+<p>跟着流程写就行，注意：</p>
+<ol>
+<li>验证码在controller处判断即可，如果有错可以提前返回；</li>
+<li>“记住我”选项，无非就是控制登录有效时间的长短；</li>
+<li>合法性判断不要漏情况了</li>
+</ol>
+<h2 id="密码加密问题"><a href="#密码加密问题" class="headerlink" title="密码加密问题"></a>密码加密问题</h2><p>看视频的时候下面有同学留言说前端向后端传输时的密码依然可以被抓包，于是去查了一下资料。</p>
+<ol>
+<li>后端的加密是必须的，不然一旦数据泄露，数据库信息就是裸露的，密码就透露出去了。后端的操作聚焦于密码存储的安全性。</li>
+<li>虽然使用https传输时是密文传输，但中间人可以通过伪造证书来抓包。此时可以在前端用一个加密，比如RSA<br>参考：<a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000014454702">目前主流靠谱的登录密码加密流程是怎样的？ - SegmentFault 思否</a></li>
+</ol>
+<h1 id="显示登录信息"><a href="#显示登录信息" class="headerlink" title="显示登录信息"></a>显示登录信息</h1><p>需求：导航栏功能显示会与登录状态相关，eg. 登录后就不显示注册功能了；登录后才显示个人信息。</p>
+<h2 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h2><p>当很多请求都需要完成相同的功能时，可以用spring中的拦截器拦截请求进行处理。</p>
+<p>拦截器，实现接口HandlerInterceptor，有三个方法preHandle、postHandle、afterCompletion，分别是进入控制器前，控制器完成后而视图解析前，全部完成后。</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ol>
+<li><p>每次请求时都要新建一个ThreadLocal来放User，这样性能影响会大吗？<br>ThreadLocal创建一个线程局部变量，可以说就是个变量，不会很大影响性能的。</p>
+</li>
+<li><p>拦截器与过滤器的区别<br>在JavaWeb中学过过滤器，想了一下不知道两者有啥区别，查了资料，看得一知半解…：<br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022833940">过滤器 和 拦截器 6个区别，别再傻傻分不清了 - SegmentFault 思否</a></p>
+</li>
+</ol>
+<h1 id="账号设置"><a href="#账号设置" class="headerlink" title="账号设置"></a>账号设置</h1><h2 id="上传头像"><a href="#上传头像" class="headerlink" title="上传头像"></a>上传头像</h2><p>一些细节：</p>
+<ol>
+<li>在表单处声明文件类型，multipart/form-data</li>
+<li>用SpringMVC的Multipartfile方法，然后这个方法是视图层的，所以不要写到Service层了。</li>
+<li>图像存在服务器，但是访问时是根据web访问路径。根据web访问路径的话需要有特定的控制器来处理。</li>
+<li>在读取图像的时候，可以设置一个缓冲区来输出，能快一点</li>
+</ol>
+<h3 id="图像合法性验证"><a href="#图像合法性验证" class="headerlink" title="图像合法性验证"></a>图像合法性验证</h3><p>参考：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6850418117882052615">在SpringBoot中验证用户上传的图片资源 - 掘金</a></p>
+<h2 id="密码修改"><a href="#密码修改" class="headerlink" title="密码修改"></a>密码修改</h2><p>Service：输入userid、原密码和新密码，判断原密码和数据库中的是否相等；相等再继续，向数据库中修改新密码。</p>
+<h1 id="检查登录状态"><a href="#检查登录状态" class="headerlink" title="检查登录状态"></a>检查登录状态</h1><p>需求：有的页面如果没登录是不能访问的，如账号设置等，一个一个页面添加规则有点麻烦，可以对<strong>需要拦截的方法</strong>进行注解。然后在拦截器中对这些被注解的方法进行拦截。</p>
+<ul>
+<li>项目中有多个拦截器时，按照注册顺序来执行</li>
+</ul>
+<p>自定义注解时用元注解来注解。<br>常用元注解：@Target, @Retenion, @Document, @Inherited。前两个是必须的，Target描述注解的范围，即注解可以用在哪。Retention用于描述注解的生命周期，表示需要在什么级别保存该注解，即保留的时间长短<br>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/kingsonfu/p/10634174.html">Java 元注解 - 傻不拉几猫 - 博客园</a></p>
 
     </div>
 
@@ -309,19 +338,19 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%89%9B%E5%AE%A2%E7%BD%91%E5%90%8E%E7%AB%AF/" rel="tag"># 牛客网后端</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/03/18/Pycharm%E4%B8%AD%E6%89%93%E4%B8%8D%E5%BC%80Python-Console-le/" rel="prev" title="Pycharm中打不开Python Console|DLL load failed">
-                  <i class="fa fa-chevron-left"></i> Pycharm中打不开Python Console|DLL load failed
+                <a href="/2022/07/05/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%882%EF%BC%89-%E6%B3%A8%E5%86%8C%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/" rel="prev" title="牛客后端项目（2）-注册模块开发">
+                  <i class="fa fa-chevron-left"></i> 牛客后端项目（2）-注册模块开发
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/07/09/%E7%BB%84%E4%BC%9A%E7%AC%94%E8%AE%B0/" rel="next" title="组会笔记">
-                  组会笔记 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
