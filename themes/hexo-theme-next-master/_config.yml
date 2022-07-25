@@ -36,10 +36,10 @@ custom_file_path:
 # ---------------------------------------------------------------
 
 # Schemes
-scheme: Muse
-#scheme: Mist
-#scheme: Pisces
-#scheme: Gemini
+# scheme: Muse
+# scheme: Mist
+# scheme: Pisces
+scheme: Gemini
 
 # Dark Mode
 darkmode: false
@@ -574,7 +574,7 @@ comments:
     #disqus:
     #  text: Load Disqus
     #  order: -1
-    #gitalk:
+    #themealk:
     #  order: -2
 
 # Disqus

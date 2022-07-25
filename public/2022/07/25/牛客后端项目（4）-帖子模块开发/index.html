@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/heart_bulb_stars_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/heart_bulb_stars_16x16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gLGfRPT9se9YzlHqvbbRntI9WnsvXNTS7qjR1TrmrGM">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="核心功能开发完成~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="牛客后端项目（4）-帖子模块开发">
+<meta property="og:url" content="http://example.com/2022/07/25/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%884%EF%BC%89-%E5%B8%96%E5%AD%90%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="StrayInCosmos">
+<meta property="og:description" content="核心功能开发完成~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/ProjectNowCoder/img-20220711153249.png">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/ProjectNowCoder/img-20220711153432.png">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/ProjectNowCoder/img-20220711153824.png">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/ProjectNowCoder/img-20220720111820.png">
+<meta property="og:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/ProjectNowCoder/img-20220725110805.png">
+<meta property="article:published_time" content="2022-07-25T03:42:47.000Z">
+<meta property="article:modified_time" content="2022-07-25T03:42:47.000Z">
+<meta property="article:author" content="Maggie Lee">
+<meta property="article:tag" content="牛客网后端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://forlwq.oss-cn-hangzhou.aliyuncs.com/ProjectNowCoder/img-20220711153249.png">
+
+
+<link rel="canonical" href="http://example.com/2022/07/25/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%884%EF%BC%89-%E5%B8%96%E5%AD%90%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>牛客后端项目（4）-帖子模块开发 | StrayInCosmos</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">StrayInCosmos</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Exploring the world</p>
+      <img class="custom-logo-image" src="/uploads/custom-logo.jpg" alt="StrayInCosmos">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E6%95%8F%E6%84%9F%E8%AF%8D"><span class="nav-number">1.</span> <span class="nav-text">过滤敏感词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E5%B8%96%E5%AD%90"><span class="nav-number">2.</span> <span class="nav-text">发布帖子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AJAX"><span class="nav-number">2.1.</span> <span class="nav-text">AJAX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E5%B8%96%E5%AD%90-1"><span class="nav-number">2.2.</span> <span class="nav-text">发布帖子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%96%E5%AD%90%E8%AF%A6%E6%83%85"><span class="nav-number">3.</span> <span class="nav-text">帖子详情</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">4.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E5%BC%82%E5%B8%B8%E9%97%AE%E9%A2%98%E4%B8%8E%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="nav-number">4.1.</span> <span class="nav-text">并发异常问题与事务隔离级别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6-%E9%94%81%F0%9F%94%92"><span class="nav-number">4.2.</span> <span class="nav-text">实现机制-锁🔒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring%E7%9A%84%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86"><span class="nav-number">4.3.</span> <span class="nav-text">Spring的事务管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E8%AF%84%E8%AE%BA"><span class="nav-number">5.</span> <span class="nav-text">显示评论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-number">5.1.</span> <span class="nav-text">问题解决</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9E%E5%A4%8D%E8%AF%84%E8%AE%BA"><span class="nav-number">6.</span> <span class="nav-text">回复评论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A7%81%E4%BF%A1"><span class="nav-number">7.</span> <span class="nav-text">私信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%81%E4%BF%A1%E5%88%97%E8%A1%A8"><span class="nav-number">7.1.</span> <span class="nav-text">私信列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%81%E4%BF%A1%E8%AF%A6%E6%83%85"><span class="nav-number">7.2.</span> <span class="nav-text">私信详情</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E7%A7%81%E4%BF%A1"><span class="nav-number">7.3.</span> <span class="nav-text">发送私信</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-number">8.</span> <span class="nav-text">统一的异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81"><span class="nav-number">8.1.</span> <span class="nav-text">用户登录验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#404%E5%92%8C500%E9%A1%B5%E9%9D%A2"><span class="nav-number">8.2.</span> <span class="nav-text">404和500页面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%9F%E4%B8%80%E7%9A%84%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95"><span class="nav-number">9.</span> <span class="nav-text">统一的日志记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP"><span class="nav-number">9.1.</span> <span class="nav-text">AOP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">9.2.</span> <span class="nav-text">AOP的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%8A%9F%E8%83%BD"><span class="nav-number">9.3.</span> <span class="nav-text">日志功能</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Maggie Lee</p>
+  <div class="site-description" itemprop="description">A personal blog recording personal life</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Maggie22" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/25/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%884%EF%BC%89-%E5%B8%96%E5%AD%90%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Maggie Lee">
+      <meta itemprop="description" content="A personal blog recording personal life">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StrayInCosmos">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          牛客后端项目（4）-帖子模块开发
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-25 11:42:47" itemprop="dateCreated datePublished" datetime="2022-07-25T11:42:47+08:00">2022-07-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">项目开发笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>核心功能开发完成~</p>
+<span id="more"></span>
+
+<h1 id="过滤敏感词"><a href="#过滤敏感词" class="headerlink" title="过滤敏感词"></a>过滤敏感词</h1><p>Trie树<br>树的节点包括：子节点（用Map&lt;String, TrieNode&gt;表示），是否是单词结尾的标志（boolean isEnd）<br>两个关键方法：</p>
+<ol>
+<li>向Trie树添加字符串</li>
+<li>对字符串进行敏感词过滤（要注意start指针要一位一位移动，否则会漏判，除了start-end是一个敏感词，start直接跳到end+1）</li>
+</ol>
+<ul>
+<li>注意要跳过敏感词中的符号，比如❤福❤彩❤：<br>用<code>CharUtils.isAsciiAlphanumeric</code>判断字符是否是0-9a-zA-Z范围内（<a target="_blank" rel="noopener" href="https://www.educative.io/answers/what-is-charutilsisasciialphanumeric-in-java">参考文档</a>），以及是否是0x2e80~0x9FF之间（这是东亚文字的区间）</li>
+</ul>
+<h1 id="发布帖子"><a href="#发布帖子" class="headerlink" title="发布帖子"></a>发布帖子</h1><h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><ol>
+<li>在页面中引入jQuery：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://code.jquery.com/jquery-3.3.1.min.js&quot;</span> <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>页面中写异步请求发送的方法，举个例子：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">send</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    $.post(</span><br><span class="line">        <span class="string">&quot;/community/ajax&quot;</span>,</span><br><span class="line">        &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;liz&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">24</span>&#125;,</span><br><span class="line">        <span class="function"><span class="keyword">function</span> (<span class="params">data</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">typeof</span> data);</span><br><span class="line">            <span class="built_in">console</span>.log(data);</span><br><span class="line"></span><br><span class="line">            data = $.parseJSON(data);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">typeof</span> data);</span><br><span class="line">            <span class="built_in">console</span>.log(data);</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="发布帖子-1"><a href="#发布帖子-1" class="headerlink" title="发布帖子"></a>发布帖子</h2><p>dao层：insert方法<br>service层：处理标题和内容，insert<br>controller层：从前端获取title和content，创建DiscussPost对象，之后调用service，返回是否成功的结果<br>视图：处理返回结果，发布成功时刷新，失败时留在发布界面<br>注意：</p>
+<ol>
+<li>帖子的标题和内容需要合法性处理</li>
+<li>帖子内容如果有html标签，要转义一下，避免内容对页面的损害。用<code>HtmlUtils.htmlEscape</code>方法即可</li>
+</ol>
+<h1 id="帖子详情"><a href="#帖子详情" class="headerlink" title="帖子详情"></a>帖子详情</h1><p>dao：selectById方法<br>service：调用dao的selectById方法<br>controller：postId在路径中传，调用service的select方法，找到的DiscussPost和相关的User对象，送入Model，传到前端视图中显示。</p>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>事务：一组操作，要么全部执行，要么全部不执行<br>四个性质：ACID，原子性、一致性、隔离性、持久性<br>隔离性：事务与事务之间的操作是相互隔离的。主要解决<strong>并发异常</strong>问题。<br><strong>常见的并发异常</strong>：1. 第一类丢失更新、第二类丢失更新；2. 脏读、不可重复度、幻读<br><strong>常见的隔离级别</strong>：<br>Read Uncommitted<br>Read Committed</p>
+<h2 id="并发异常问题与事务隔离级别"><a href="#并发异常问题与事务隔离级别" class="headerlink" title="并发异常问题与事务隔离级别"></a>并发异常问题与事务隔离级别</h2><p><strong>第一类丢失更新</strong>：事务A和事务B同时对同一个数据操作，事务A更新完了，但是事务B发现进行了回滚，那么对于事务A的更新就丢失了。（B回滚导致A丢失）<br>图片来源：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/study/live/246/3/13">牛客网课程</a><br><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/ProjectNowCoder/img-20220711153249.png" alt="Img"></p>
+<p><strong>第二类丢失更新</strong>：<br>B提交导致A丢失<br>图片来源：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/study/live/246/3/13">牛客网课程</a><br><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/ProjectNowCoder/img-20220711153432.png" alt="Img"></p>
+<p><strong>脏读</strong>：事务A读了事务B还<strong>没有提交但修改</strong>了的数据</p>
+<p><strong>不可重复读</strong>：事务B在修改数据，事务A两次读同一个数据但读到了<strong>不一样</strong>的数据。</p>
+<p><strong>幻读</strong>：事务B在插入数据，事务A两次读但是读到了<strong>不一样多</strong>的数据</p>
+<p><strong>事务隔离级别</strong>：<br>Y表示问题会出现，N表示问题不会出现<br>图片来源：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/study/live/246/3/13">牛客网课程</a><br><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/ProjectNowCoder/img-20220711153824.png" alt="Img"></p>
+<h2 id="实现机制-锁🔒"><a href="#实现机制-锁🔒" class="headerlink" title="实现机制-锁🔒"></a>实现机制-锁🔒</h2><p><strong>数据库自带：悲观锁</strong>（即出现并发就一定会有问题，所以一定要加锁）</p>
+<ol>
+<li>共享锁（S锁）：事务A对数据加了共享锁后，其他事务只能加共享锁，不能加排它锁</li>
+<li>排它锁（X锁）：事务A对数据加了排他锁后，其他事务什么锁都不能加</li>
+</ol>
+<p><strong>自定义：乐观锁</strong>（即认为出现并发不一定会有问题）<br>用时间戳或版本号等来实现。当要更新数据的时候，发现版本号发生变化了，就取消更新，不然就更新数据（当然也要更新一下版本号）。</p>
+<p>扩展：<a target="_blank" rel="noopener" href="https://blog.csdn.net/flying_hengfei/article/details/106965517">MVCC到底是什么？这一篇博客就够啦_flying$的博客-CSDN</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Waves___/article/details/105295060">MySQL中MVCC的正确打开方式（源码佐证）_Waves___的博客-CSDN博客</a></p>
+<h2 id="Spring的事务管理"><a href="#Spring的事务管理" class="headerlink" title="Spring的事务管理"></a>Spring的事务管理</h2><p>对任意数据库，有一套统一的API来使用🙆‍♀️<br>两种实现方法：1. 声明式，通过xml或注解配置；2.编程式，通过TransactionTemplate，再用接口回调。</p>
+<p>@Transactinoal<br>isolation选择事务隔离等级<br>propagation选择事务传播机制，一个方法同时调用serviceA和serivceB，如果涉及事务就需要考虑A和B之间事务的关系是什么<br>REQUIRED：保持当前事务，如果没有则创建新事务<br>REQUIRES_NEW：创建新事务，并暂停当前事务<br>NESTED：如果存在当前事务，则嵌套在其中执行（对B会有单独的提交和回滚）；没有就和REQUIRED一样</p>
+<p>更多Propagation的解读：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yanyan19880509/article/details/53041564">spring事务-说说Propagation及其实现原理_那个天真的人的博客-CSDN</a></p>
+<h1 id="显示评论"><a href="#显示评论" class="headerlink" title="显示评论"></a>显示评论</h1><p><strong>数据结构</strong>：设计一张表来保存所有评论，由于帖子、帖子的评论都可以有评论，为了减少冗余，把它们都存放在同一张表里，并用<code>entity type</code>来指明是帖子或评论的评论，<code>entity id</code>指明（帖子或评论的）id</p>
+<p><strong>dao</strong>：（1）用<code>entity type</code>和<code>entity id</code>查询评论列表（分页）；（2）用<code>entity type</code>和<code>entity id</code>查询评论数量<br><strong>service</strong>：读取某个帖子对应的所有评论，注意评论中还有对某个评论的回复。<br><strong>controller</strong>：通过访问/discuss/{discussPostId}来访问所有评论，用service读，注意要<strong>分页</strong>，replyList就不用了。设计一个ViewObject返回要显示在网页上的内容，用List保存评论<code>commentList</code>，其中每个元素是一个map，包括一条评论所有相关的内容，即评论内容<code>comment</code>、发表评论的用户<code>user</code>（需要用户名、id和headerUrl）、该评论的回复<code>replyList</code>，其中<code>replyList</code>是和<code>commentList</code>相同的结构，用for循环保存起来，需要注意的是回复有<code>target id</code>，即回复的是哪一条评论。另外还要保存replyList的评论数量，commentList的数量可以用discussPost.commentCount来读取，省得在数据库中搜索浪费时间了。</p>
+<p>注意：</p>
+<ul>
+<li>视图处理上要仔细，别的没啥。难点在于返回网页的内容处理上</li>
+</ul>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><ol>
+<li>controller层和service层的内容，该交给哪个层去完成感觉总是弄混。比如说这里要封装一个给视图显示的viewObject。为什么不交给Service层去处理？我的理解：Service层应具有高可复用性，如果交给service去处理的话，返回一个视图显示对象，这是不太合理的。</li>
+</ol>
+<h1 id="回复评论"><a href="#回复评论" class="headerlink" title="回复评论"></a>回复评论</h1><p>dao层：插入一条评论；更新帖子的回复数量<br>service层：DiscussPostService更新帖子的回复数量。CommentService插入一条评论（注意要html转义、敏感词处理）、调用DiscussPostService方法更新帖子的回复数量。<br>视图层：controller得到comment，前端传回content、targetId、entityType、entityId，剩下的补充一下。调用service方法完成添加评论后要重定向到当前页面，从而进行刷新。</p>
+<p>注意：</p>
+<ul>
+<li>CommentService的插入评论方法，同时对数据库有两次修改，需要放在一个<strong>事务</strong>中处理。</li>
+</ul>
+<h1 id="私信"><a href="#私信" class="headerlink" title="私信"></a>私信</h1><p>数据结构：message表，<code>from_id</code>和<code>to_id</code>分别表示发送用户和接受用户；为了便于查询，将两者拼接为一个字符串表示会话id即<code>conversation_id</code>；其他还有创建时间、内容、状态。注意用户之间的会话，两者不分谁发送谁接收，这个会话是他们共有的。</p>
+<h2 id="私信列表"><a href="#私信列表" class="headerlink" title="私信列表"></a>私信列表</h2><p>私信列表包括朋友私信和系统通知，两者逻辑可以复用。<br>对于朋友私信而言，列表的每一个元素是一个用户，显示该用户头像、用户名（User），以及最近一次会话的内容和时间（Message），以及所有会话数量和未读会话数量。整个列表是当前用户拥有的所有会话（无论当前用户是发送方还是接收方）<br>推出dao层需要的方法：</p>
+<ol>
+<li>UserMapper：根据id查询用户</li>
+<li>MessageMapper：（1）分页查询会话中的最近一次消息（用会话id和limit）；（2）查询和某个用户之间的会话数量（用会话id和status）；（3）为了分页，查询该用户的所有未删除的会话数量（用userId和status）</li>
+</ol>
+<p>service：直接把dao层封装一下<br>controller：封装一个传给视图层的列表</p>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>在统计未读消息的时候，只有对于接收方是未读的消息才要统计，对于发送方而言这条消息不是未读的！</li>
+<li>在写sql语句的时候，因为只需要会话中的最近一次消息，用max(id)并按照conversationId分组即可</li>
+</ol>
+<h2 id="私信详情"><a href="#私信详情" class="headerlink" title="私信详情"></a>私信详情</h2><p>即一个会话的多个消息。用分页展示。其他和私信列表类似。私信的信息注意用户保存的是发送方，可以提前保存起来。</p>
+<h2 id="发送私信"><a href="#发送私信" class="headerlink" title="发送私信"></a>发送私信</h2><p>dao：insert一条message<br>service：内容的合法性要处理，</p>
+<h1 id="统一的异常处理"><a href="#统一的异常处理" class="headerlink" title="统一的异常处理"></a>统一的异常处理</h1><ol>
+<li>用户登录验证。有些方法只有在用户登录之后才可以使用（如回帖、发消息等）</li>
+<li>不存在的网页（404）和服务器出错的网页（500）</li>
+</ol>
+<h2 id="用户登录验证"><a href="#用户登录验证" class="headerlink" title="用户登录验证"></a>用户登录验证</h2><p>使用<strong>拦截器Interceptor</strong>，对需要登录才可以继续的方法进行拦截。为了方便，可以对这些方法统一使用相同的注释来标记（eg. LoginRequired)，在拦截器中判断方法是否包含该注释，再判断用户是否已登录，如果没有登录就重定向到登录页。</p>
+<h2 id="404和500页面"><a href="#404和500页面" class="headerlink" title="404和500页面"></a>404和500页面</h2><p>直接把404页面放到template/error文件夹下面，spring会自动处理。如果没有使用模板引擎，就可以把404页面放到error文件夹中，error文件夹再放到static文件夹下即可。</p>
+<p>而对于500页面，是服务器异常，我们需要把这些异常记录到日志中去，不能直接交给spring boot自动处理。<br>我们使用@ControllerAdvice注解定义一个新的类，从而统一扩增控制器的功能。@ControllerAdvice注解和@ExceptionHandler搭配使用，可以统一处理异常。而@ControllerAdvice中的参数可以指定需要对哪些控制器进行功能增强，如<code>@ControllerAdvice(annotations = Controller.class)</code>对标有Controller注解的所有类进行增强。</p>
+<h1 id="统一的日志记录"><a href="#统一的日志记录" class="headerlink" title="统一的日志记录"></a>统一的日志记录</h1><h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><p>面向切面编程。是一种OOP编程的扩展。将项目中多个模块共有的业务看做一个切面，如下图所示（图片来源：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/study/live/246/3/33">牛客网课程</a>）<br><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/ProjectNowCoder/img-20220720111820.png" alt="Img"><br><img src="https://forlwq.oss-cn-hangzhou.aliyuncs.com/ProjectNowCoder/img-20220725110805.png" alt="Img"></p>
+<p>Joinpoint：连接点，指明aspect是在哪个位置织入。可以是属性或方法等。<br>Target：目标对象，Spring中就是一个Bean<br>Weaving（织入）：有三种织入方式，分别是（1）编译时织入；（2）装载时织入；（3）运行时织入<br>Aspect：方面组件，我理解是在要实现的统一方法是什么（如我们要实现的就是日志这个功能）。其中由包括Pointcut和Advice，前者说明这个Aspect可以在哪里加入，后者是具体逻辑。</p>
+<h2 id="AOP的实现"><a href="#AOP的实现" class="headerlink" title="AOP的实现"></a>AOP的实现</h2><ol>
+<li>AspectJ：是一种扩展了Java的<strong>新语言</strong>；在<strong>编译时</strong>进行织入</li>
+<li>Spring AOP：用Java实现；在<strong>运行时</strong>通过动态代理进行织入；但只支持方法类型的连接点</li>
+</ol>
+<h2 id="日志功能"><a href="#日志功能" class="headerlink" title="日志功能"></a>日志功能</h2><p>用Spring AOP来实现。<br>Spring AOP的代理有两种方式：</p>
+<ol>
+<li>JDK动态代理。是默认方法；如果target是接口，就用JDK动态代理来进行织入</li>
+<li>CGLib动态代理。在没有接口的情况下，就用这个方式来代理</li>
+</ol>
+<p>具体实现：</p>
+<ol>
+<li>类用@Component、@Aspect标注。</li>
+<li>定义切入点：<code>@Pointcut(&quot;execution(* com.nowcoder.community.service.*.*(..))&quot;)</code></li>
+<li>定义通知逻辑。根据在织入点前后处理，可以分为Before、AfterReturning，以及Around、AfterThrowing等</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%89%9B%E5%AE%A2%E7%BD%91%E5%90%8E%E7%AB%AF/" rel="tag"># 牛客网后端</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/08/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/" rel="prev" title="牛客后端项目（3）-登录模块开发">
+                  <i class="fa fa-chevron-left"></i> 牛客后端项目（3）-登录模块开发
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maggie Lee</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script async src="/js/cursor/clicklove.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>

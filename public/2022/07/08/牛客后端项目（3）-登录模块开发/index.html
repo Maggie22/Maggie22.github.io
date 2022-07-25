@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/heart_bulb_stars_32x32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/heart_bulb_stars_16x16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="gLGfRPT9se9YzlHqvbbRntI9WnsvXNTS7qjR1TrmrGM">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="登录模块，比注册做起来熟练了，项目开发中的小细节很多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="牛客后端项目（3）-登录模块开发">
+<meta property="og:url" content="http://example.com/2022/07/08/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="StrayInCosmos">
+<meta property="og:description" content="登录模块，比注册做起来熟练了，项目开发中的小细节很多">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2022/07/08/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/FILES/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91.md/img-20220708145518.JPG">
+<meta property="article:published_time" content="2022-07-08T08:22:07.000Z">
+<meta property="article:modified_time" content="2022-07-08T08:22:07.000Z">
+<meta property="article:author" content="Maggie Lee">
+<meta property="article:tag" content="牛客网后端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/07/08/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/FILES/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91.md/img-20220708145518.JPG">
+
+
+<link rel="canonical" href="http://example.com/2022/07/08/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>牛客后端项目（3）-登录模块开发 | StrayInCosmos</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">StrayInCosmos</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Exploring the world</p>
+      <img class="custom-logo-image" src="/uploads/custom-logo.jpg" alt="StrayInCosmos">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">会话管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97"><span class="nav-number">2.</span> <span class="nav-text">登录模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">密码加密问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E7%99%BB%E5%BD%95%E4%BF%A1%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text">显示登录信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-number">3.1.</span> <span class="nav-text">拦截器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.</span> <span class="nav-text">问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%A6%E5%8F%B7%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">账号设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0%E5%A4%B4%E5%83%8F"><span class="nav-number">4.1.</span> <span class="nav-text">上传头像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E5%90%88%E6%B3%95%E6%80%A7%E9%AA%8C%E8%AF%81"><span class="nav-number">4.1.1.</span> <span class="nav-text">图像合法性验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E7%A0%81%E4%BF%AE%E6%94%B9"><span class="nav-number">4.2.</span> <span class="nav-text">密码修改</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E7%99%BB%E5%BD%95%E7%8A%B6%E6%80%81"><span class="nav-number">5.</span> <span class="nav-text">检查登录状态</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Maggie Lee</p>
+  <div class="site-description" itemprop="description">A personal blog recording personal life</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Maggie22" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/08/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Maggie Lee">
+      <meta itemprop="description" content="A personal blog recording personal life">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="StrayInCosmos">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          牛客后端项目（3）-登录模块开发
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-08 16:22:07" itemprop="dateCreated datePublished" datetime="2022-07-08T16:22:07+08:00">2022-07-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">项目开发笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>登录模块，比注册做起来熟练了，项目开发中的小细节很多</p>
+<span id="more"></span>
+
+<h1 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h1><p>Cookie是HTTP的标准，Session是JavaEE的标准，Session还是基于Cookie的。</p>
+<p><strong>设置Cookie</strong>：一个cookie是一个键值对，需要对response添加cookie才会送到浏览器去。生存时间默认是关了浏览器就不在了。</p>
+<p><strong>设置Session</strong>：SpringMVC的控制器方法中作为参数直接获得，首次访问服务器时会生成一个sessionId并作为cookie保存到浏览器，下一次访问服务器时会携带这个sessionId对session内容进行读取</p>
+<p>Session在<strong>分布式服务器</strong>遇到的问题：分布式服务器一般会使用负载均衡策略，当浏览器首次访问时，假设此时在服务器A上创建了一个Session，而浏览器再次访问时可能会由其他服务器B进行处理，而服务器B可能没有session，此时就会出错。<br>解决办法：</p>
+<ol>
+<li>对于同一个浏览器请求，每次由同一个服务器处理。缺点：有悖“负载均衡”</li>
+<li>在所有服务器上都有一个Session备份。缺点：同步耗时、占用空间</li>
+<li>把所有Session存在一个单体服务器上。缺点：有悖“分布式”，只能访问一个服务器不仅会产生性能瓶颈，还有挂掉的风险</li>
+<li><strong>将数据放到数据库上，同时为了减小例如Mysql数据库要读硬盘的性能影响，用NoSql数据库，如Redis。</strong></li>
+</ol>
+<h1 id="登录模块"><a href="#登录模块" class="headerlink" title="登录模块"></a>登录模块</h1><p><strong>需求</strong>：用户输入用户名、密码、验证码，进行验证与登录。</p>
+<p>设计一个数据结构来记录登录状态，ticket作为登录凭证，用expired记录过期时间，login_ticket表结构<br>字段名：id, user_id, ticket, status, expired</p>
+<p><img src="./FILES/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%883%EF%BC%89-%E7%99%BB%E5%BD%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91.md/img-20220708145518.JPG" alt="登录流程图"></p>
+<p>跟着流程写就行，注意：</p>
+<ol>
+<li>验证码在controller处判断即可，如果有错可以提前返回；</li>
+<li>“记住我”选项，无非就是控制登录有效时间的长短；</li>
+<li>合法性判断不要漏情况了</li>
+</ol>
+<h2 id="密码加密问题"><a href="#密码加密问题" class="headerlink" title="密码加密问题"></a>密码加密问题</h2><p>看视频的时候下面有同学留言说前端向后端传输时的密码依然可以被抓包，于是去查了一下资料。</p>
+<ol>
+<li>后端的加密是必须的，不然一旦数据泄露，数据库信息就是裸露的，密码就透露出去了。后端的操作聚焦于密码存储的安全性。</li>
+<li>虽然使用https传输时是密文传输，但中间人可以通过伪造证书来抓包。此时可以在前端用一个加密，比如RSA<br>参考：<a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000014454702">目前主流靠谱的登录密码加密流程是怎样的？ - SegmentFault 思否</a></li>
+</ol>
+<h1 id="显示登录信息"><a href="#显示登录信息" class="headerlink" title="显示登录信息"></a>显示登录信息</h1><p>需求：导航栏功能显示会与登录状态相关，eg. 登录后就不显示注册功能了；登录后才显示个人信息。</p>
+<h2 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h2><p>当很多请求都需要完成相同的功能时，可以用spring中的拦截器拦截请求进行处理。</p>
+<p>拦截器，实现接口HandlerInterceptor，有三个方法preHandle、postHandle、afterCompletion，分别是进入控制器前，控制器完成后而视图解析前，全部完成后。</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ol>
+<li><p>每次请求时都要新建一个ThreadLocal来放User，这样性能影响会大吗？<br>ThreadLocal创建一个线程局部变量，可以说就是个变量，不会很大影响性能的。</p>
+</li>
+<li><p>拦截器与过滤器的区别<br>在JavaWeb中学过过滤器，想了一下不知道两者有啥区别，查了资料，看得一知半解…：<br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022833940">过滤器 和 拦截器 6个区别，别再傻傻分不清了 - SegmentFault 思否</a></p>
+</li>
+</ol>
+<h1 id="账号设置"><a href="#账号设置" class="headerlink" title="账号设置"></a>账号设置</h1><h2 id="上传头像"><a href="#上传头像" class="headerlink" title="上传头像"></a>上传头像</h2><p>一些细节：</p>
+<ol>
+<li>在表单处声明文件类型，multipart/form-data</li>
+<li>用SpringMVC的Multipartfile方法，然后这个方法是视图层的，所以不要写到Service层了。</li>
+<li>图像存在服务器，但是访问时是根据web访问路径。根据web访问路径的话需要有特定的控制器来处理。</li>
+<li>在读取图像的时候，可以设置一个缓冲区来输出，能快一点</li>
+</ol>
+<h3 id="图像合法性验证"><a href="#图像合法性验证" class="headerlink" title="图像合法性验证"></a>图像合法性验证</h3><p>参考：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6850418117882052615">在SpringBoot中验证用户上传的图片资源 - 掘金</a></p>
+<h2 id="密码修改"><a href="#密码修改" class="headerlink" title="密码修改"></a>密码修改</h2><p>Service：输入userid、原密码和新密码，判断原密码和数据库中的是否相等；相等再继续，向数据库中修改新密码。</p>
+<h1 id="检查登录状态"><a href="#检查登录状态" class="headerlink" title="检查登录状态"></a>检查登录状态</h1><p>需求：有的页面如果没登录是不能访问的，如账号设置等，一个一个页面添加规则有点麻烦，可以对<strong>需要拦截的方法</strong>进行注解。然后在拦截器中对这些被注解的方法进行拦截。</p>
+<ul>
+<li>项目中有多个拦截器时，按照注册顺序来执行</li>
+</ul>
+<p>自定义注解时用元注解来注解。<br>常用元注解：@Target, @Retenion, @Document, @Inherited。前两个是必须的，Target描述注解的范围，即注解可以用在哪。Retention用于描述注解的生命周期，表示需要在什么级别保存该注解，即保留的时间长短<br>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/kingsonfu/p/10634174.html">Java 元注解 - 傻不拉几猫 - 博客园</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%89%9B%E5%AE%A2%E7%BD%91%E5%90%8E%E7%AB%AF/" rel="tag"># 牛客网后端</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/05/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%882%EF%BC%89-%E6%B3%A8%E5%86%8C%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/" rel="prev" title="牛客后端项目（2）-注册模块开发">
+                  <i class="fa fa-chevron-left"></i> 牛客后端项目（2）-注册模块开发
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/25/%E7%89%9B%E5%AE%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%884%EF%BC%89-%E5%B8%96%E5%AD%90%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/" rel="next" title="牛客后端项目（4）-帖子模块开发">
+                  牛客后端项目（4）-帖子模块开发 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Maggie Lee</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'none'
+      },
+      options: {
+        renderActions: {
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script async src="/js/cursor/clicklove.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8},"log":false});</script></body>
+</html>
