@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="85d8c162-0b8a-4a59-b20c-0b4523df6780" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/themes/hexo-theme-next" beforeDir="false" afterPath="$PROJECT_DIR$/themes/hexo-theme-next" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/hexo-theme-next/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/hexo-theme-next/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/hexo-theme-next/layout/_layout.swig" beforeDir="false" afterPath="$PROJECT_DIR$/themes/hexo-theme-next/layout/_layout.swig" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2CnKxSiQxQLiuSS5I85LysfD3AO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="85d8c162-0b8a-4a59-b20c-0b4523df6780" name="Default Changelist" comment="" />
+      <created>1659433158654</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1659433158654</updated>
+      <workItem from="1659433161279" duration="10000" />
+    </task>
+    <servers />
+  </component>
+</project>
